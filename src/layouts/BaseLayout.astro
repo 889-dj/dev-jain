@@ -1,0 +1,149 @@
+---
+import { siteConfig } from '../data/site';
+import '../styles/global.css';
+
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  ogImage = siteConfig.ogImage,
+  canonicalUrl = siteConfig.url,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={siteConfig.name} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteConfig.url}${ogImage}`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteConfig.url}${ogImage}`} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style is:global>
+      /* Smooth Theme Transitions */
+      body, .bg-white, .bg-gray-50, .bg-gray-100, .bg-black, .text-gray-900, .text-gray-800, .text-gray-600, .text-gray-500, .text-gray-400, .border-gray-200, .border-gray-100, .bg-gradient-to-br, .bg-blue-50, .bg-indigo-50, .text-blue-600, .text-indigo-600 {
+        transition-property: color, background-color, border-color, box-shadow;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
+      }
+
+      /* Dark Theme */
+      [data-theme="dark"] body { background-color: #111827 !important; color: #f9fafb !important; }
+      [data-theme="dark"] .bg-gradient-to-br { background: linear-gradient(to bottom right, #111827, #1f2937) !important; }
+      [data-theme="dark"] .bg-white { background-color: #1f2937 !important; border-color: #374151 !important; }
+      [data-theme="dark"] .border-gray-200, [data-theme="dark"] .border-gray-100 { border-color: #374151 !important; }
+      [data-theme="dark"] .text-gray-900 { color: #f9fafb !important; }
+      [data-theme="dark"] h1.text-gray-900, [data-theme="dark"] h2.text-gray-900, [data-theme="dark"] h3.text-gray-900 { color: #a855f7 !important; } /* Purple heading */
+      [data-theme="dark"] .text-gray-800, [data-theme="dark"] .text-gray-700 { color: #e5e7eb !important; }
+      [data-theme="dark"] .text-gray-600 { color: #d1d5db !important; }
+      [data-theme="dark"] .text-gray-500 { color: #9ca3af !important; }
+      [data-theme="dark"] .text-gray-400 { color: #6b7280 !important; }
+      [data-theme="dark"] .detail-label { color: #a855f7 !important; } /* Purple labels */
+      [data-theme="dark"] .text-white { color: #ffffff !important; }
+      [data-theme="dark"] .bg-gray-50, [data-theme="dark"] .bg-gray-100 { background-color: #374151 !important; border-color: #4b5563 !important; }
+      [data-theme="dark"] .before\:bg-gray-300::before { background-color: #6b7280 !important; }
+      [data-theme="dark"] .bg-black { background-color: #a855f7 !important; color: #ffffff !important; } 
+      [data-theme="dark"] .hover\:bg-gray-800:hover { background-color: #9333ea !important; }
+      [data-theme="dark"] .hover\:bg-gray-100:hover { background-color: #4b5563 !important; }
+      [data-theme="dark"] .selection\:bg-black::selection { background-color: #a855f7 !important; color: #ffffff !important; }
+      
+      [data-theme="dark"] .bg-blue-50 { background-color: #1e3a8a !important; color: #bfdbfe !important; }
+      [data-theme="dark"] .text-blue-600 { color: #60a5fa !important; }
+      [data-theme="dark"] .bg-blue-500 { background-color: #3b82f6 !important; }
+      [data-theme="dark"] .before\:bg-blue-500::before { background-color: #a855f7 !important; } /* Purple circles */
+      [data-theme="dark"] .after\:bg-gray-100::after { background-color: #374151 !important; }
+      [data-theme="dark"] .hover\:bg-blue-100:hover { background-color: #1e40af !important; }
+
+      [data-theme="dark"] .bg-indigo-50 { background-color: #312e81 !important; color: #ffffff !important; }
+      [data-theme="dark"] .text-indigo-600 { color: #ffffff !important; }
+      [data-theme="dark"] .hover\:bg-indigo-100:hover { background-color: #3730a3 !important; }
+
+      /* Neon Theme */
+      [data-theme="neon"] body { background-color: #050505 !important; color: #39ff14 !important; }
+      [data-theme="neon"] .bg-gradient-to-br { background: #050505 !important; }
+      [data-theme="neon"] .bg-white { background-color: #0a0a0a !important; border-color: #39ff14 !important; box-shadow: 0 0 10px rgba(57,255,20,0.1) !important; }
+      [data-theme="neon"] .border-gray-200, [data-theme="neon"] .border-gray-100 { border-color: #39ff14 !important; }
+      [data-theme="neon"] .text-gray-900 { color: #f4f4f5 !important; text-shadow: none !important; }
+      [data-theme="neon"] h1.text-gray-900, [data-theme="neon"] h2.text-gray-900, [data-theme="neon"] h3.text-gray-900 { color: #39ff14 !important; text-shadow: 0 0 5px rgba(57,255,20,0.5) !important; }
+      [data-theme="neon"] .detail-label { color: #39ff14 !important; }
+      [data-theme="neon"] .text-gray-800, [data-theme="neon"] .text-gray-700 { color: #e4e4e7 !important; }
+      [data-theme="neon"] .text-gray-600 { color: #d4d4d8 !important; } /* Highly readable silver for descriptions */
+      [data-theme="neon"] .text-gray-500 { color: #a1a1aa !important; }
+      [data-theme="neon"] .text-gray-400 { color: #71717a !important; }
+      [data-theme="neon"] .text-white { color: #000000 !important; }
+      [data-theme="neon"] .bg-gray-50, [data-theme="neon"] .bg-gray-100 { background-color: #111111 !important; border-color: #39ff14 !important; }
+      [data-theme="neon"] .before\:bg-gray-300::before { background-color: #00ff7f !important; }
+      [data-theme="neon"] .bg-black { background-color: #39ff14 !important; color: #000000 !important; box-shadow: 0 0 15px rgba(57,255,20,0.6) !important; }
+      [data-theme="neon"] .hover\:bg-gray-800:hover { background-color: #32e612 !important; }
+      [data-theme="neon"] .hover\:bg-gray-100:hover { background-color: #111111 !important; }
+      [data-theme="neon"] .selection\:bg-black::selection { background-color: #39ff14 !important; color: #000000 !important; }
+      
+      [data-theme="neon"] .bg-blue-50 { background-color: rgba(57,255,20,0.1) !important; color: #39ff14 !important; border: 1px solid #39ff14 !important; }
+      [data-theme="neon"] .text-blue-600 { color: #39ff14 !important; }
+      [data-theme="neon"] .bg-blue-500 { background-color: #39ff14 !important; box-shadow: 0 0 8px #39ff14; }
+      [data-theme="neon"] .before\:bg-blue-500::before { background-color: #39ff14 !important; box-shadow: 0 0 8px #39ff14; }
+      [data-theme="neon"] .after\:bg-gray-100::after { background-color: #39ff14 !important; opacity: 0.5; }
+      [data-theme="neon"] .hover\:bg-blue-100:hover { background-color: rgba(57,255,20,0.2) !important; }
+
+      [data-theme="neon"] .bg-indigo-50 { background-color: rgba(255,20,147,0.1) !important; color: #ff1493 !important; border: 1px solid #ff1493 !important; }
+      [data-theme="neon"] .text-indigo-600 { color: #ff1493 !important; }
+      [data-theme="neon"] .hover\:bg-indigo-100:hover { background-color: rgba(255,20,147,0.2) !important; }
+    </style>
+  </head>
+  <body class="bg-gray-100 text-gray-900 font-sans antialiased selection:bg-black selection:text-white min-h-screen">
+    <div class="fixed inset-0 z-[-1] bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0]"></div>
+    <main class="w-full min-h-screen p-4 sm:p-8 md:p-12 relative">
+      <slot />
+    </main>
+
+    <!-- Theme Switcher -->
+    <button id="theme-toggle" aria-label="Toggle Theme" class="fixed bottom-6 right-6 w-14 h-14 bg-white rounded-full shadow-2xl border border-gray-200 flex items-center justify-center z-50 transform transition duration-300 hover:scale-110 active:scale-95 group">
+      <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-800 group-hover:rotate-12 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+      </svg>
+    </button>
+
+    <script>
+      const themes = ['light', 'dark', 'neon'];
+      let currentThemeIndex = 0;
+      
+      const savedTheme = localStorage.getItem('portfolio-theme');
+      if (savedTheme && themes.includes(savedTheme)) {
+        currentThemeIndex = themes.indexOf(savedTheme);
+        if (savedTheme !== 'light') {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      }
+
+      const toggleBtn = document.getElementById('theme-toggle');
+      toggleBtn.addEventListener('click', () => {
+        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+        const newTheme = themes[currentThemeIndex];
+        
+        if (newTheme === 'light') {
+          document.documentElement.removeAttribute('data-theme');
+        } else {
+          document.documentElement.setAttribute('data-theme', newTheme);
+        }
+        localStorage.setItem('portfolio-theme', newTheme);
+      });
+    </script>
+  </body>
+</html>

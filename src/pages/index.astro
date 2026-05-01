@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import data from '../data.json';
+
+const { profile, interests, experience, skills, education, projects, portfolio, details } = data;
+---
+
+<BaseLayout>
+  <div class="max-w-[1100px] w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-12">
+    
+    <!-- Row 1 -->
+    <!-- Profile Card -->
+    <div class="md:col-span-2 lg:col-span-2 bg-white rounded-3xl p-8 shadow-sm border border-gray-200 flex flex-col justify-center transform transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <div class="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+        <img src={profile.image[0].black} alt={profile.name} class="w-28 h-28 rounded-full bg-gray-100 object-cover shadow-inner shrink-0" />
+        <div class="text-center sm:text-left">
+          <h1 class="text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-gray-900">{profile.name}</h1>
+          <p class="text-gray-600 leading-relaxed text-lg mb-6">{profile.bio}</p>
+          <a href="/Dev_Jain_Resume.pdf" download="Dev_Jain_Resume.pdf" class="inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition shadow-md hover:-translate-y-0.5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Download CV
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Details Card -->
+    <div class="md:col-span-1 lg:col-span-1 bg-white rounded-3xl p-6 shadow-sm border border-gray-200 flex flex-col justify-center gap-4 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+      {details.map(detail => (
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center shrink-0 border border-gray-100">
+            {detail.icon ? <img src={detail.icon} alt={detail.type} class="w-5 h-5 opacity-70 object-contain" /> : <div class="w-5 h-5 text-gray-400 font-bold flex items-center justify-center">·</div>}
+          </div>
+          <div class="overflow-hidden">
+            <div class="detail-label text-[11px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">{detail.type}</div>
+            {detail.url && detail.url !== '#' ? (
+              <a href={detail.url} class="detail-value font-semibold text-gray-900 hover:text-blue-600 transition truncate block">{detail.value}</a>
+            ) : (
+              <div class="detail-value font-semibold text-gray-900 truncate block">{detail.value}</div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Row 2 -->
+    <!-- Experience Card -->
+    <div class="md:col-span-1 lg:col-span-2 bg-white rounded-3xl p-8 shadow-sm border border-gray-200 flex flex-col justify-center transform transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <h2 class="text-2xl font-bold mb-8 text-gray-900">Experience</h2>
+      <div class="space-y-8">
+        {experience.map(exp => (
+          <div class="relative pl-6 before:content-[''] before:absolute before:left-0 before:top-2 before:w-2 before:h-2 before:bg-blue-500 before:rounded-full after:content-[''] after:absolute after:left-[3px] after:top-4 after:w-0.5 after:h-full after:bg-gray-100 last:after:hidden">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
+              <div>
+                <h3 class="font-bold text-xl text-gray-900">{exp.role}</h3>
+                <div class="text-gray-500 font-semibold mt-1">{exp.company}</div>
+              </div>
+              <span class="text-xs font-bold text-gray-500 bg-gray-100 px-3 py-1.5 rounded-full shrink-0">{exp.period}</span>
+            </div>
+            <ul class="list-none text-gray-600 text-sm space-y-2 mt-4">
+              {exp.points.map(point => (
+                <li class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full">{point}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Connect & Interests -->
+    <div class="md:col-span-1 lg:col-span-1 flex flex-col gap-6">
+      <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 flex-1 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold mb-5 text-gray-900">Connect</h2>
+        {portfolio.length >= 4 ? (
+          <div class="flex flex-wrap gap-3">
+            {portfolio.map(social => (
+              <a href={social.url} title={social.name} class="w-12 h-12 flex items-center justify-center bg-gray-50 border border-gray-100 rounded-2xl hover:bg-gray-100 hover:scale-105 transition-transform shadow-sm">
+                <img src={social.icon} alt={social.name} class="w-6 h-6 object-contain" />
+              </a>
+            ))}
+          </div>
+        ) : (
+          <>
+            <div class="flex md:hidden flex-wrap gap-3">
+              {portfolio.map(social => (
+                <a href={social.url} title={social.name} class="w-12 h-12 flex items-center justify-center bg-gray-50 border border-gray-100 rounded-2xl hover:bg-gray-100 hover:scale-105 transition-transform shadow-sm">
+                  <img src={social.icon} alt={social.name} class="w-6 h-6 object-contain" />
+                </a>
+              ))}
+            </div>
+            <div class="hidden md:flex flex-col gap-3">
+              {portfolio.map(social => (
+                <a href={social.url} title={social.name} class="flex items-center gap-4 px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-2xl hover:bg-gray-100 hover:-translate-y-0.5 transition-transform shadow-sm">
+                  <img src={social.icon} alt={social.name} class="w-6 h-6 object-contain" />
+                  <span class="font-semibold text-gray-700">{social.name}</span>
+                </a>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+      
+      <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 flex-1 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-center">
+        <h2 class="text-lg font-bold mb-5 text-gray-900">Interests</h2>
+        <div class="flex flex-wrap gap-2.5">
+          {interests.map(interest => (
+            <span class="px-4 py-2 bg-gray-50 border border-gray-100 text-gray-700 rounded-xl text-sm font-semibold">{interest.name}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3 -->
+    <!-- Skills Card -->
+    <div class="md:col-span-1 lg:col-span-2 bg-white rounded-3xl p-8 shadow-sm border border-gray-200 flex flex-col justify-center transform transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <h2 class="text-2xl font-bold mb-6 text-gray-900">Tech Stack</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
+        <div class="min-w-0 flex flex-col sm:items-start">
+          <h3 class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4 truncate w-full text-left" title="Languages & Frameworks">Languages & Frameworks</h3>
+          <div class="flex flex-wrap gap-3 justify-start">
+            {skills.languages_frameworks.map(skill => (
+              <div class="w-10 h-10 bg-gray-50 border border-gray-100 rounded-xl flex items-center justify-center shadow-sm p-2" title={skill.name}>
+                <img src={skill.icon} alt={skill.name} class="w-full h-full object-contain" />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="min-w-0 flex flex-col sm:items-center">
+          <h3 class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4 truncate w-full text-left sm:text-center" title="Backend & DB">Backend & DB</h3>
+          <div class="flex flex-wrap gap-3 justify-start sm:justify-center">
+            {skills.backend_databases.map(skill => (
+              <div class="w-10 h-10 bg-gray-50 border border-gray-100 rounded-xl flex items-center justify-center shadow-sm p-2" title={skill.name}>
+                <img src={skill.icon} alt={skill.name} class="w-full h-full object-contain" />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="min-w-0 flex flex-col sm:items-end">
+          <h3 class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4 truncate w-full text-left sm:text-right" title="Tools & Platforms">Tools & Platforms</h3>
+          <div class="flex flex-wrap gap-3 justify-start sm:justify-end">
+            {skills.tools_platforms.map(skill => (
+              <div class="w-10 h-10 bg-gray-50 border border-gray-100 rounded-xl flex items-center justify-center shadow-sm p-2" title={skill.name}>
+                <img src={skill.icon} alt={skill.name} class="w-full h-full object-contain" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education Card -->
+    <div class="md:col-span-1 lg:col-span-1 bg-white rounded-3xl p-6 shadow-sm border border-gray-200 flex flex-col justify-center transform transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <h2 class="text-xl font-bold mb-6 text-gray-900">Education</h2>
+      <div class="space-y-6">
+        {education.map(edu => (
+          <div class="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2 before:w-2 before:h-2 before:border-2 before:border-gray-300 before:rounded-full">
+            <h3 class="font-bold text-sm text-gray-900">{edu.level}</h3>
+            <div class="text-gray-600 text-sm mt-1">{edu.details}</div>
+            <div class="text-gray-400 text-xs font-medium mt-1">{edu.institution} • {edu.year}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Row 4 -->
+    <!-- Projects Card -->
+    <div class="md:col-span-2 lg:col-span-3 bg-white rounded-3xl p-8 shadow-sm border border-gray-200 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <h2 class="text-2xl font-bold mb-8 text-gray-900">Featured Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projects.map(project => (
+          <a href={project.link} class="group block bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 hover:shadow-md transition flex flex-col">
+            <div class="h-48 w-full bg-gray-200 overflow-hidden relative shrink-0">
+              <img src={project.image} alt={project.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=Project'" />
+            </div>
+            <div class="p-6 bg-white border-t border-gray-100 flex-1 flex flex-col">
+              <h3 class="font-bold text-xl mb-2 text-gray-900 group-hover:text-blue-600 transition-colors">{project.title}</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">{project.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+    
+  </div>
+</BaseLayout>
