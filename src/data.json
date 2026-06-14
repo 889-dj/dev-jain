@@ -18,7 +18,8 @@
     { "name": "Chess" },
     { "name": "Reading" },
     { "name": "Cloud Computing" },
-    { "name": "Performance Optimization" }
+    { "name": "Performance Optimization" },
+    { "name": "Artificial Intelligence" }
   ],
   "experience": [
     {
@@ -29,7 +30,10 @@
       "points": [
         "Streamlined the development-to-deployment pipeline, implementing CI/CD and OTA updates that cut internal testing cycles by 20%.",
         "Migrated legacy architecture to a modern, scalable architecture, significantly improving overall app performance and maintainability.",
-        "Transformed the codebase to be agent-ready, enabling faster feature delivery while reducing token consumption by 45%."
+        "Transformed the codebase to be agent-ready, enabling faster feature delivery while reducing token consumption by 45%.",
+        "Designed and implemented a CI/CD pipeline for mobile updates and automated testing using Maestro with EAS Workflows and GitHub Actions, improving release reliability and speed.",
+        "Ideated and delivered slot machine and shuffle card game features end-to-end, including backend implementation, resulting in a 10% increase in app engagement.",
+        "Built AI agents (AI employees) with Hermes and owned end-to-end production delivery for sales, marketing, product management, and fundraising workflows; deployed cost-efficiently on Azure Container Apps and significantly improved daily productivity for the CEO and CMO."
       ]
     },
     {
@@ -73,7 +77,10 @@
     "tools_platforms": [
       { "name": "VS Code", "icon": "./images/icons/vscode.png" },
       { "name": "Git", "icon": "./images/icons/git.png" },
-      { "name": "AWS", "icon": "./images/icons/aws.png" }
+      { "name": "AWS", "icon": "./images/icons/aws.png" },
+      { "name": "Framer", "icon": "./images/icons/figma.png" },
+      { "name": "Azure Cloud", "icon": "./images/icons/azure.svg" },
+      { "name": "AI", "icon": "./images/icons/ai.svg" }
     ]
   },
   "education": [
@@ -105,9 +112,23 @@
     }
   ],
   "portfolio": [
-    { "name": "LinkedIn", "url": "https://www.linkedin.com/in/dev-jain1", "icon": "./images/icons/linkedin.png" },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/dev-jain1",
+      "icon": "./images/icons/linkedin.png"
+    },
     { "name": "GitHub", "url": "#", "icon": "./images/icons/github.png" },
-    { "name": "X", "url": "#", "icon": "./images/icons/x.png" }
+    { "name": "X", "url": "#", "icon": "./images/icons/x.png" },
+    {
+      "name": "LeetCode",
+      "url": "https://leetcode.com/u/dj178167/",
+      "icon": "./images/icons/leetcode.svg"
+    },
+    {
+      "name": "Chess.com",
+      "url": "https://www.chess.com/member/dev-jain",
+      "icon": "./images/icons/chesscom.svg"
+    }
   ],
   "details": [
     {

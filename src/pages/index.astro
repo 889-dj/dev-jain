@@ -12,6 +12,49 @@ const {
   portfolio,
   details,
 } = data;
+
+const escapeHtml = (value) =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+
+const highlightExperienceText = (value) => {
+  const technologyTerms = [
+    "CI/CD",
+    "OTA",
+    "Maestro",
+    "EAS Workflows",
+    "GitHub Actions",
+    "Hermes",
+    "Azure Container Apps",
+    "React Native",
+    "Next.js",
+    "Node.js",
+    "SQL",
+  ];
+
+  const normalized = value.replaceAll("&#39;", "'").replaceAll("&apos;", "'");
+  const escaped = escapeHtml(normalized);
+  const sortedTerms = [...technologyTerms].sort((a, b) => b.length - a.length);
+  const termsPattern = sortedTerms
+    .map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("|");
+
+  const withNumbersHighlighted = escaped.replace(
+    /\b\d+(?:\.\d+)?(?:\s?(?:%|MB|GB|K|k|x|X))?\b/g,
+    (match) => `<strong>${match}</strong>`,
+  );
+
+  if (!termsPattern) {
+    return withNumbersHighlighted;
+  }
+
+  return withNumbersHighlighted.replace(
+    new RegExp(`\\b(${termsPattern})\\b`, "g"),
+    (match) => `<strong>${match}</strong>`,
+  );
+};
 ---
 
 <BaseLayout>
@@ -128,9 +171,10 @@ const {
               </div>
               <ul class="list-none text-gray-600 text-sm space-y-2 mt-4">
                 {exp.points.map((point) => (
-                  <li class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full">
-                    {point}
-                  </li>
+                  <li
+                    class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full"
+                    set:html={highlightExperienceText(point)}
+                  />
                 ))}
               </ul>
             </div>
@@ -146,7 +190,7 @@ const {
       >
         <h2 class="text-lg font-bold mb-5 text-gray-900">Connect</h2>
         {
-          portfolio.length >= 4 ? (
+          portfolio.length >= 6 ? (
             <div class="flex flex-wrap gap-3">
               {portfolio.map((social) => (
                 <a
