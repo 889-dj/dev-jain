@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Skills from "../components/Skills.astro";
+import Experience from "../components/Experience.astro";
+import Projects from "../components/Projects.astro";
+import Blog from "../components/Blog.astro";
+import Contact from "../components/Contact.astro";
+
+const profileSchema = {
+  "@type": "Person",
+  "@id": "https://yourdomain.com/#person",
+  name: "Your Name",
+  jobTitle: "Full-Stack Developer",
+  description:
+    "Developer focused on fast, accessible, and scalable digital products.",
+  url: "https://yourdomain.com/",
+  sameAs: ["https://github.com", "https://linkedin.com", "https://twitter.com"],
+  knowsAbout: [
+    "Frontend Development",
+    "TypeScript",
+    "Astro",
+    "Web Performance",
+    "Accessibility",
+  ],
+};
+
+const pageSchema = {
+  "@type": "WebPage",
+  "@id": "https://yourdomain.com/#webpage",
+  url: "https://yourdomain.com/",
+  name: "Your Name - Developer Portfolio",
+  description:
+    "Portfolio featuring projects, technical writing, work experience, and contact details.",
+  about: { "@id": "https://yourdomain.com/#person" },
+  inLanguage: "en-US",
+};
+---
+
+<BaseLayout
+  title="Your Name - Developer Portfolio"
+  description="Portfolio of Your Name, a full-stack developer building fast, accessible, and maintainable web experiences."
+  keywords={[
+    "Your Name",
+    "developer portfolio",
+    "full-stack developer",
+    "frontend engineer",
+    "astro portfolio",
+  ]}
+  schema={[profileSchema, pageSchema]}
+>
+  <Header />
+  <main>
+    <Hero />
+    <About />
+    <Skills />
+    <Experience />
+    <Projects />
+    <Blog />
+    <Contact />
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p>
+        Built with <a href="https://astro.build" target="_blank" rel="noopener"
+          >Astro</a
+        > &middot; &copy; {new Date().getFullYear()} Your Name
+      </p>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style is:global>
+  .footer {
+    padding: 2rem 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+  }
+</style>
+
+<script is:inline>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+  );
+
+  document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+</script>

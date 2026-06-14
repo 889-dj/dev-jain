@@ -1,0 +1,125 @@
+---
+const name = 'Your Name';
+const title = 'Full-Stack Developer';
+const taglines = [
+  'I build fast, accessible web experiences.',
+  'I turn complex problems into simple interfaces.',
+  'I craft code that scales.',
+];
+---
+
+<section class="hero" id="hero">
+  <div class="container">
+    <p class="greeting">Hi, I'm</p>
+    <h1 class="name">{name}</h1>
+    <p class="title">{title}</p>
+    <p class="tagline" id="tagline"></p>
+    <div class="cta-group">
+      <a href="#projects" class="btn btn-primary">View my work</a>
+      <a href="#contact" class="btn btn-outline">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: var(--nav-height);
+  }
+
+  .greeting {
+    font-size: 1.1rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .name {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .title {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin-bottom: 2rem;
+    min-height: 1.6em;
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: var(--accent);
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+</style>
+
+<script>
+  const taglines = ['I build fast, accessible web experiences.', 'I turn complex problems into simple interfaces.', 'I craft code that scales.'];
+  const el = document.getElementById('tagline');
+
+  if (el) {
+    let taglineIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let pauseEnd = 0;
+
+    function type() {
+      const current = taglines[taglineIndex];
+      const now = Date.now();
+
+      if (now < pauseEnd) {
+        requestAnimationFrame(type);
+        return;
+      }
+
+      if (!isDeleting) {
+        el.innerHTML = current.substring(0, charIndex + 1) + '<span class="cursor"></span>';
+        charIndex++;
+        if (charIndex === current.length) {
+          isDeleting = true;
+          pauseEnd = now + 2000;
+        }
+        setTimeout(type, 50);
+      } else {
+        el.innerHTML = current.substring(0, charIndex) + '<span class="cursor"></span>';
+        charIndex--;
+        if (charIndex < 0) {
+          isDeleting = false;
+          taglineIndex = (taglineIndex + 1) % taglines.length;
+          charIndex = 0;
+          pauseEnd = now + 400;
+        }
+        setTimeout(type, 25);
+      }
+    }
+
+    type();
+  }
+</script>

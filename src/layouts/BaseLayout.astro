@@ -1,0 +1,119 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
+  canonicalPath?: string;
+  noindex?: boolean;
+  keywords?: string[];
+  publishedTime?: string;
+  modifiedTime?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description = "Developer portfolio focused on fast, accessible, and scalable web products.",
+  image = "/social-card.svg",
+  type = "website",
+  canonicalPath,
+  noindex = false,
+  keywords = [
+    "portfolio",
+    "developer",
+    "frontend",
+    "full-stack",
+    "astro",
+    "web performance",
+  ],
+  publishedTime,
+  modifiedTime,
+  schema,
+} = Astro.props;
+
+const siteOrigin = Astro.site ? new URL(Astro.site).origin : Astro.url.origin;
+const canonicalUrl = new URL(
+  canonicalPath ?? Astro.url.pathname,
+  siteOrigin,
+).toString();
+const absoluteImage = new URL(image, siteOrigin).toString();
+const robotsContent = noindex
+  ? "noindex,nofollow,noarchive"
+  : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1";
+
+const baseSchema = {
+  "@type": "WebSite",
+  "@id": `${siteOrigin}/#website`,
+  url: siteOrigin,
+  name: "Your Name Portfolio",
+  description,
+  inLanguage: "en-US",
+  publisher: {
+    "@type": "Person",
+    name: "Your Name",
+  },
+};
+
+const additionalSchema = Array.isArray(schema)
+  ? schema
+  : schema
+    ? [schema]
+    : [];
+const schemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [baseSchema, ...additionalSchema],
+});
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Your Name" />
+    <meta name="keywords" content={keywords.join(", ")} />
+    <meta name="robots" content={robotsContent} />
+    <meta name="googlebot" content={robotsContent} />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Your Name Portfolio" />
+    <meta property="og:image" content={absoluteImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteImage} />
+
+    {
+      publishedTime && (
+        <meta property="article:published_time" content={publishedTime} />
+      )
+    }
+    {
+      modifiedTime && (
+        <meta property="article:modified_time" content={modifiedTime} />
+      )
+    }
+
+    <meta name="generator" content={Astro.generator} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={schemaJson} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @import "../styles/global.css";
+</style>

@@ -1,0 +1,25 @@
+---
+const paragraphs = [
+  "I'm a developer who cares deeply about user experience, clean code, and continuous learning. With a background in computer science and years of hands-on experience, I bridge the gap between design and engineering.",
+  "When I'm not coding, you'll find me contributing to open-source projects, writing about web technologies, or exploring the latest in frontend tooling.",
+];
+---
+
+<section id="about">
+  <div class="container">
+    <h2 class="section-title fade-in">About</h2>
+    {paragraphs.map((p) => (
+      <p class="fade-in about-text">{p}</p>
+    ))}
+  </div>
+</section>
+
+<style>
+  .about-text {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 680px;
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+  }
+</style>

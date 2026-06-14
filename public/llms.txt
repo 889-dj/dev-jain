@@ -1,0 +1,24 @@
+# Your Name Portfolio
+
+> Portfolio and technical blog for Your Name, a full-stack developer focused on fast, accessible web products.
+
+## Primary URLs
+- / : Homepage with bio, skills, experience, projects, and contact methods.
+- /blog : Blog index with technical articles.
+
+## Topics
+- Frontend architecture
+- Full-stack development
+- Web performance
+- Accessibility
+- Astro
+- TypeScript
+
+## Contact
+- Email: hello@example.com
+- GitHub: https://github.com
+- LinkedIn: https://linkedin.com
+- X/Twitter: https://twitter.com
+
+## Full Machine-Readable Context
+- /llms-full.txt

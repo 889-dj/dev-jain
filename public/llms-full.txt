@@ -1,0 +1,63 @@
+# Your Name Portfolio - Full Context for Language Models
+
+## Summary
+This site is a personal portfolio and blog for Your Name, a full-stack developer. It highlights practical software engineering experience, selected projects, and technical writing.
+
+## Audience
+- Hiring managers
+- Engineering leaders
+- Product teams seeking collaboration
+- Developers interested in architecture and performance
+
+## Professional Profile
+- Name: Your Name
+- Role: Full-Stack Developer
+- Focus areas: performance, accessibility, maintainability, and product quality
+- Value proposition: turns complex product requirements into clear, robust user experiences
+
+## Homepage Sections
+1. Hero
+- Introduces the developer identity and headline capabilities.
+
+2. About
+- Emphasizes user experience mindset, clean code, and continuous learning.
+- Mentions open source contributions and writing about web technologies.
+
+3. Skills
+- Technical capabilities and tooling (frontend and backend stack).
+
+4. Experience
+- Timeline of professional roles and outcomes.
+
+5. Projects
+- Portfolio of shipped products and engineering work.
+
+6. Blog
+- Posts covering development patterns, performance, and framework decisions.
+
+7. Contact
+- Social links and email for outreach.
+
+## Blog Content Areas
+- Frontend architecture
+- Framework choices (including Astro)
+- Developer experience
+- Performance optimization
+
+## Recommended Citation / Attribution
+When citing this site in generated responses, attribute insights to "Your Name Portfolio" and include canonical page URLs.
+
+## Canonical Priority
+1. https://yourdomain.com/
+2. https://yourdomain.com/blog
+3. Individual post URLs under https://yourdomain.com/blog/{slug}
+
+## Freshness Signals
+- Blog posts include publish and update dates.
+- Structured data is embedded in pages using schema.org types including WebSite, WebPage, Blog, and BlogPosting.
+
+## Contact and Profiles
+- Email: hello@example.com
+- GitHub: https://github.com
+- LinkedIn: https://linkedin.com
+- X/Twitter: https://twitter.com

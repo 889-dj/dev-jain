@@ -1,0 +1,184 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: post,
+  }));
+}
+
+const post = Astro.props as CollectionEntry<"blog">;
+const renderedHtml = post.rendered?.html ?? "";
+const canonicalPath = `/blog/${post.id}`;
+const publishedTime = post.data.date.toISOString();
+const modifiedTime = (post.data.updatedDate ?? post.data.date).toISOString();
+
+const blogPostingSchema = {
+  "@type": "BlogPosting",
+  "@id": `https://yourdomain.com${canonicalPath}#blogposting`,
+  mainEntityOfPage: `https://yourdomain.com${canonicalPath}`,
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: publishedTime,
+  dateModified: modifiedTime,
+  author: {
+    "@type": "Person",
+    name: "Your Name",
+    url: "https://yourdomain.com/",
+  },
+  publisher: {
+    "@type": "Person",
+    name: "Your Name",
+  },
+  keywords: post.data.tags?.join(", "),
+  inLanguage: "en-US",
+};
+---
+
+<BaseLayout
+  title={`${post.data.title} - Your Name`}
+  description={post.data.description}
+  type="article"
+  canonicalPath={canonicalPath}
+  publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
+  keywords={post.data.tags?.length
+    ? post.data.tags
+    : ["web development", "software engineering"]}
+  schema={blogPostingSchema}
+>
+  <Header />
+  <main class="post-page">
+    <article class="container">
+      <a href="/blog" class="back-link">← Back to blog</a>
+      <header class="post-header">
+        <time class="post-date"
+          >{
+            post.data.date.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }</time
+        >
+        <h1 class="post-title">{post.data.title}</h1>
+        <p class="post-description">{post.data.description}</p>
+      </header>
+      <div class="post-content" set:html={renderedHtml} />
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .post-page {
+    padding-top: calc(var(--nav-height) + 3rem);
+    min-height: 100vh;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  .post-header {
+    max-width: 700px;
+    margin-bottom: 3rem;
+  }
+
+  .post-date {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .post-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin: 0.5rem 0;
+    line-height: 1.2;
+  }
+
+  .post-description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .post-content {
+    max-width: 700px;
+    line-height: 1.8;
+  }
+
+  .post-content h1,
+  .post-content h2,
+  .post-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+  }
+
+  .post-content h1 {
+    font-size: 1.75rem;
+  }
+  .post-content h2 {
+    font-size: 1.5rem;
+  }
+  .post-content h3 {
+    font-size: 1.25rem;
+  }
+
+  .post-content p {
+    margin-bottom: 1.25rem;
+    color: var(--text-secondary);
+  }
+
+  .post-content ul,
+  .post-content ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+    color: var(--text-secondary);
+  }
+
+  .post-content li {
+    margin-bottom: 0.4rem;
+  }
+
+  .post-content blockquote {
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  .post-content pre {
+    background: var(--code-bg);
+    padding: 1rem;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .post-content code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, monospace;
+    font-size: 0.9em;
+  }
+
+  .post-content :not(pre) > code {
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+  }
+</style>
