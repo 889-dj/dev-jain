@@ -1,0 +1,136 @@
+{
+  "profile": {
+    "name": "Dev Jain",
+    "image": [
+      { "black": "./images/avatar-black.png" },
+      { "white": "./images/avatar-white.png" },
+      { "red": "./images/avatar-red.png" },
+      { "blue": "./images/avatar-blue.png" },
+      { "green": "./images/avatar-green.png" },
+      { "yellow": "./images/avatar-yellow.png" },
+      { "purple": "./images/avatar-purple.png" }
+    ],
+    "bio": "Full-Stack & Native Apps Engineer specializing in the JavaScript ecosystem (React Native, Next.js, MERN). I bridge the gap between high-level vision and production-ready systems, focusing on scalable architecture, performance, and rapid product iteration to drive long-term business growth."
+  },
+  "interests": [
+    { "name": "React Native" },
+    { "name": "System Architecture" },
+    { "name": "Chess" },
+    { "name": "Reading" },
+    { "name": "Cloud Computing" },
+    { "name": "Performance Optimization" }
+  ],
+  "experience": [
+    {
+      "id": "vela-se",
+      "company": "Vela (formerly Reewild)",
+      "role": "Software Engineer",
+      "period": "Aug 2025 - Present",
+      "points": [
+        "Streamlined the development-to-deployment pipeline, implementing CI/CD and OTA updates that cut internal testing cycles by 20%.",
+        "Migrated legacy architecture to a modern, scalable architecture, significantly improving overall app performance and maintainability.",
+        "Transformed the codebase to be agent-ready, enabling faster feature delivery while reducing token consumption by 45%."
+      ]
+    },
+    {
+      "id": "vela-intern",
+      "company": "Vela (formerly Reewild)",
+      "role": "Software Engineer Intern",
+      "period": "Jan 2025 - Jul 2025",
+      "points": [
+        "Architected the frontend for the 'Planet Points' product launch using React Native, driving a 30% growth in user acquisition.",
+        "Rapidly engineered and deployed the 'Receipt Scanning' ecosystem within a 2-week sprint, driving a 15% surge in daily active usage.",
+        "Executed a comprehensive optimization of the application architecture, slashing the app bundle size by 100 MB."
+      ]
+    },
+    {
+      "id": "pss-techno",
+      "company": "PSS TECHNO SERVICE",
+      "role": "Web Developer",
+      "period": "Oct 2024 - Dec 2024",
+      "points": [
+        "Built and maintained dynamic websites for clients using React and PHP, tailored to business-specific needs.",
+        "Delivered clean, responsive UIs with optimized performance across devices."
+      ]
+    }
+  ],
+  "skills": {
+    "languages_frameworks": [
+      { "name": "HTML5", "icon": "./images/icons/html.png" },
+      { "name": "CSS3", "icon": "./images/icons/css.png" },
+      { "name": "JavaScript", "icon": "./images/icons/javascript.png" },
+      { "name": "TypeScript", "icon": "./images/icons/typescript.png" },
+      { "name": "React", "icon": "./images/icons/react.png" },
+      { "name": "Next.js", "icon": "./images/icons/nextjs.png" },
+      { "name": "React Native", "icon": "./images/icons/react.png" },
+      { "name": "PHP", "icon": "./images/icons/php.png" },
+      { "name": "C++", "icon": "./images/icons/c++.png" }
+    ],
+    "backend_databases": [
+      { "name": "Node.Js", "icon": "./images/icons/nodejs.png" },
+      { "name": "SQL", "icon": "./images/icons/sql.png" }
+    ],
+    "tools_platforms": [
+      { "name": "VS Code", "icon": "./images/icons/vscode.png" },
+      { "name": "Git", "icon": "./images/icons/git.png" },
+      { "name": "AWS", "icon": "./images/icons/aws.png" }
+    ]
+  },
+  "education": [
+    {
+      "level": "Bachelor of Technology",
+      "details": "BTech in Computer Science",
+      "institution": "Madhav Institute of Technology and Science, Gwalior",
+      "year": "2021-2024"
+    }
+  ],
+  "projects": [
+    {
+      "title": "E-commerce Platform API",
+      "description": "A scalable RESTful API for an e-commerce site using Node.js, Express, and MongoDB.",
+      "image": "./images/ecommerce-project.png",
+      "link": "#"
+    },
+    {
+      "title": "Real-time Chat Application",
+      "description": "A full-stack chat app featuring WebSockets, React for the frontend, and user authentication.",
+      "image": "./images/chat-project.png",
+      "link": "#"
+    },
+    {
+      "title": "Cloud Deployment Automation",
+      "description": "CI/CD pipeline using GitHub Actions to automate testing and deployment to AWS.",
+      "image": "./images/cloud-project.png",
+      "link": "#"
+    }
+  ],
+  "portfolio": [
+    { "name": "LinkedIn", "url": "https://www.linkedin.com/in/dev-jain1", "icon": "./images/icons/linkedin.png" },
+    { "name": "GitHub", "url": "#", "icon": "./images/icons/github.png" },
+    { "name": "X", "url": "#", "icon": "./images/icons/x.png" }
+  ],
+  "details": [
+    {
+      "type": "Email",
+      "value": "devjain2200@gmail.com",
+      "url": "mailto:devjain2200@gmail.com",
+      "icon": "./images/icons/email_3d.png"
+    },
+    {
+      "type": "Location",
+      "value": "Hyderabad, India",
+      "icon": "./images/icons/location.png"
+    },
+    {
+      "type": "LinkedIn",
+      "value": "dev-jain1",
+      "url": "https://www.linkedin.com/in/dev-jain1",
+      "icon": "./images/icons/linkedin.png"
+    },
+    {
+      "type": "Availability",
+      "value": "Open to work",
+      "icon": "./images/icons/availability_3d.png"
+    }
+  ]
+}
