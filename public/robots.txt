@@ -14,4 +14,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://yourdomain.com/sitemap-index.xml
+Sitemap: https://devjain.in/sitemap-index.xml

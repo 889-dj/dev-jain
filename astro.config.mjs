@@ -1,13 +1,11 @@
-// @ts-check
-import { defineConfig } from "astro/config";
-import sitemap from "@astrojs/sitemap";
+import { defineConfig } from 'astro/config';
+import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: "https://yourdomain.com",
-  integrations: [sitemap()],
-  markdown: {
-    shikiConfig: {
-      theme: "github-dark",
-    },
-  },
+  site: 'https://yourname.dev',
+  integrations: [
+    tailwind(),
+    sitemap(),
+  ],
 });

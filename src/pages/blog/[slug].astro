@@ -20,8 +20,8 @@ const modifiedTime = (post.data.updatedDate ?? post.data.date).toISOString();
 
 const blogPostingSchema = {
   "@type": "BlogPosting",
-  "@id": `https://yourdomain.com${canonicalPath}#blogposting`,
-  mainEntityOfPage: `https://yourdomain.com${canonicalPath}`,
+  "@id": `https://devjain.in${canonicalPath}#blogposting`,
+  mainEntityOfPage: `https://devjain.in${canonicalPath}`,
   headline: post.data.title,
   description: post.data.description,
   datePublished: publishedTime,
@@ -29,7 +29,7 @@ const blogPostingSchema = {
   author: {
     "@type": "Person",
     name: "Your Name",
-    url: "https://yourdomain.com/",
+    url: "https://devjain.in/",
   },
   publisher: {
     "@type": "Person",

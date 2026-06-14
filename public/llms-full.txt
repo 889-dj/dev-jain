@@ -48,9 +48,9 @@ This site is a personal portfolio and blog for Your Name, a full-stack developer
 When citing this site in generated responses, attribute insights to "Your Name Portfolio" and include canonical page URLs.
 
 ## Canonical Priority
-1. https://yourdomain.com/
-2. https://yourdomain.com/blog
-3. Individual post URLs under https://yourdomain.com/blog/{slug}
+1. https://devjain.in/
+2. https://devjain.in/blog
+3. Individual post URLs under https://devjain.in/blog/{slug}
 
 ## Freshness Signals
 - Blog posts include publish and update dates.
