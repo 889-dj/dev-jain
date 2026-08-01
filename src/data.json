@@ -10,7 +10,7 @@
       { "yellow": "./images/avatar-yellow.png" },
       { "purple": "./images/avatar-purple.png" }
     ],
-    "bio": "React Native + Next.js engineer. I ship mobile and web products end-to-end — from UI to CI/CD deployment."
+    "bio": "React Native + Next.js engineer. I ship mobile and web products end-to-end — from idea to production."
   },
   "interests": [
     { "name": "React Native" },
