@@ -2,7 +2,7 @@ export const siteConfig = {
   name: 'Dev Jain',
   title: 'Dev Jain — Full-Stack & Native Apps Engineer',
   description: 'Building scalable SaaS & mobile solutions with React Native, MERN, and Next.js.',
-  url: 'https://devjain.dev',
+  url: 'https://devjain.in',
   ogImage: '/og-image.png',
   email: 'devjain2200@gmail.com',
   social: {

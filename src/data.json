@@ -72,13 +72,13 @@
     ],
     "backend_databases": [
       { "name": "Node.Js", "icon": "./images/icons/nodejs.png" },
-      { "name": "SQL", "icon": "./images/icons/sql.png" }
+      { "name": "MongoDB", "icon": "./images/icons/mongodb.png" },
+      { "name": "PostgreSQL", "icon": "./images/icons/postgresql.png" }
     ],
     "tools_platforms": [
       { "name": "VS Code", "icon": "./images/icons/vscode.png" },
       { "name": "Git", "icon": "./images/icons/git.png" },
       { "name": "AWS", "icon": "./images/icons/aws.png" },
-      { "name": "Framer", "icon": "./images/icons/figma.png" },
       { "name": "Azure Cloud", "icon": "./images/icons/azure.svg" },
       { "name": "AI", "icon": "./images/icons/ai.svg" }
     ]
@@ -117,8 +117,16 @@
       "url": "https://www.linkedin.com/in/dev-jain1",
       "icon": "./images/icons/linkedin.png"
     },
-    { "name": "GitHub", "url": "#", "icon": "./images/icons/github.png" },
-    { "name": "X", "url": "#", "icon": "./images/icons/x.png" },
+    {
+      "name": "GitHub",
+      "url": "https://github.com/889-dj",
+      "icon": "./images/icons/github.png"
+    },
+    {
+      "name": "X",
+      "url": "https://x.com/Devjtwt786",
+      "icon": "./images/icons/x.png"
+    },
     {
       "name": "LeetCode",
       "url": "https://leetcode.com/u/dj178167/",
