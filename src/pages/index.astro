@@ -62,9 +62,9 @@ const highlightExperienceText = (value) => {
     class="max-w-[1100px] w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-12"
   >
     <!-- Row 1 -->
-    <!-- Profile Card -->
+    <!-- Profile / Hero Card -->
     <div
-      class="md:col-span-2 lg:col-span-2 bg-white rounded-3xl p-8 shadow-sm border border-gray-200 flex flex-col justify-center transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+      class="md:col-span-2 lg:col-span-3 bg-white rounded-3xl p-8 shadow-sm border border-gray-200 flex flex-col justify-center transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
     >
       <div class="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
         <img
@@ -74,7 +74,7 @@ const highlightExperienceText = (value) => {
         />
         <div class="text-center sm:text-left">
           <h1
-            class="text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-gray-900"
+            class="section-title text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-gray-900"
           >
             {profile.name}
           </h1>
@@ -106,109 +106,64 @@ const highlightExperienceText = (value) => {
       </div>
     </div>
 
-    <!-- Details Card -->
-    <div
-      class="md:col-span-1 lg:col-span-1 bg-white rounded-3xl p-6 shadow-sm border border-gray-200 flex flex-col justify-center gap-4 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
-    >
-      {
-        details.map((detail) => (
-          <div class="flex items-center gap-4">
-            <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center shrink-0 border border-gray-100">
-              {detail.icon ? (
-                <img
-                  src={detail.icon}
-                  alt={detail.type}
-                  class="w-5 h-5 opacity-70 object-contain"
-                />
-              ) : (
-                <div class="w-5 h-5 text-gray-400 font-bold flex items-center justify-center">
-                  ·
-                </div>
-              )}
-            </div>
-            <div class="overflow-hidden">
-              <div class="detail-label text-[11px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">
-                {detail.type}
-              </div>
-              {detail.url && detail.url !== "#" ? (
-                <a
-                  href={detail.url}
-                  class="detail-value font-semibold text-gray-900 hover:text-blue-600 transition truncate block"
-                >
-                  {detail.value}
-                </a>
-              ) : (
-                <div class="detail-value font-semibold text-gray-900 truncate block">
-                  {detail.value}
-                </div>
-              )}
-            </div>
-          </div>
-        ))
-      }
-    </div>
-
     <!-- Row 2 -->
-    <!-- Experience Card -->
+    <!-- Left column: Contact, Connect, Interests, Education (natural heights, no stretch) -->
     <div
-      class="md:col-span-1 lg:col-span-2 bg-white rounded-3xl p-8 shadow-sm border border-gray-200 flex flex-col justify-center transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+      class="md:col-span-2 lg:col-span-3 grid grid-cols-1 lg:grid-cols-3 gap-6 items-start"
     >
-      <h2 class="text-2xl font-bold mb-8 text-gray-900">Experience</h2>
-      <div class="space-y-8">
-        {
-          experience.map((exp) => (
-            <div class="relative pl-6 before:content-[''] before:absolute before:left-0 before:top-2 before:w-2 before:h-2 before:bg-blue-500 before:rounded-full after:content-[''] after:absolute after:left-[3px] after:top-4 after:w-0.5 after:h-full after:bg-gray-100 last:after:hidden">
-              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
-                <div>
-                  <h3 class="font-bold text-xl text-gray-900">{exp.role}</h3>
-                  <div class="text-gray-500 font-semibold mt-1">
-                    {exp.company}
-                  </div>
+      <div class="lg:col-span-1 flex flex-col gap-6">
+        <!-- Contact Card -->
+        <div
+          class="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 flex flex-col gap-4 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+        >
+          {
+            details.map((detail) => (
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center shrink-0 border border-gray-100">
+                  {detail.icon ? (
+                    <img
+                      src={detail.icon}
+                      alt={detail.type}
+                      class="w-5 h-5 opacity-70 object-contain"
+                    />
+                  ) : (
+                    <div class="w-5 h-5 text-gray-400 font-bold flex items-center justify-center">
+                      ·
+                    </div>
+                  )}
                 </div>
-                <span class="text-xs font-bold text-gray-500 bg-gray-100 px-3 py-1.5 rounded-full shrink-0">
-                  {exp.period}
-                </span>
+                <div class="overflow-hidden">
+                  <div class="detail-label text-[11px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">
+                    {detail.type}
+                  </div>
+                  {detail.url && detail.url !== "#" ? (
+                    <a
+                      href={detail.url}
+                      class="detail-value font-semibold text-gray-900 hover:text-blue-600 transition truncate block"
+                    >
+                      {detail.value}
+                    </a>
+                  ) : (
+                    <div class="detail-value font-semibold text-gray-900 truncate block">
+                      {detail.value}
+                    </div>
+                  )}
+                </div>
               </div>
-              <ul class="list-none text-gray-600 text-sm space-y-2 mt-4">
-                {exp.points.map((point) => (
-                  <li
-                    class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full"
-                    set:html={highlightExperienceText(point)}
-                  />
-                ))}
-              </ul>
-            </div>
-          ))
-        }
-      </div>
-    </div>
+            ))
+          }
+        </div>
 
-    <!-- Connect & Interests -->
-    <div class="md:col-span-1 lg:col-span-1 flex flex-col gap-6">
-      <div
-        class="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 flex-1 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-center"
-      >
-        <h2 class="text-lg font-bold mb-5 text-gray-900">Connect</h2>
-        {
-          portfolio.length >= 6 ? (
-            <div class="flex flex-wrap gap-3">
-              {portfolio.map((social) => (
-                <a
-                  href={social.url}
-                  title={social.name}
-                  class="w-12 h-12 flex items-center justify-center bg-gray-50 border border-gray-100 rounded-2xl hover:bg-gray-100 hover:scale-105 transition-transform shadow-sm"
-                >
-                  <img
-                    src={social.icon}
-                    alt={social.name}
-                    class="w-6 h-6 object-contain"
-                  />
-                </a>
-              ))}
-            </div>
-          ) : (
-            <>
-              <div class="flex md:hidden flex-wrap gap-3">
+        <!-- Connect Card -->
+        <div
+          class="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+        >
+          <h2 class="card-title text-lg font-bold mb-5 text-gray-900">
+            Connect
+          </h2>
+          {
+            portfolio.length >= 6 ? (
+              <div class="flex flex-wrap gap-3">
                 {portfolio.map((social) => (
                   <a
                     href={social.url}
@@ -223,51 +178,151 @@ const highlightExperienceText = (value) => {
                   </a>
                 ))}
               </div>
-              <div class="hidden md:flex flex-col gap-3">
-                {portfolio.map((social) => (
-                  <a
-                    href={social.url}
-                    title={social.name}
-                    class="flex items-center gap-4 px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-2xl hover:bg-gray-100 hover:-translate-y-0.5 transition-transform shadow-sm"
-                  >
-                    <img
-                      src={social.icon}
-                      alt={social.name}
-                      class="w-6 h-6 object-contain"
-                    />
-                    <span class="font-semibold text-gray-700">
-                      {social.name}
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </>
-          )
-        }
+            ) : (
+              <>
+                <div class="flex md:hidden flex-wrap gap-3">
+                  {portfolio.map((social) => (
+                    <a
+                      href={social.url}
+                      title={social.name}
+                      class="w-12 h-12 flex items-center justify-center bg-gray-50 border border-gray-100 rounded-2xl hover:bg-gray-100 hover:scale-105 transition-transform shadow-sm"
+                    >
+                      <img
+                        src={social.icon}
+                        alt={social.name}
+                        class="w-6 h-6 object-contain"
+                      />
+                    </a>
+                  ))}
+                </div>
+                <div class="hidden md:flex flex-col gap-3">
+                  {portfolio.map((social) => (
+                    <a
+                      href={social.url}
+                      title={social.name}
+                      class="flex items-center gap-4 px-5 py-3.5 bg-gray-50 border border-gray-100 rounded-2xl hover:bg-gray-100 hover:-translate-y-0.5 transition-transform shadow-sm"
+                    >
+                      <img
+                        src={social.icon}
+                        alt={social.name}
+                        class="w-6 h-6 object-contain"
+                      />
+                      <span class="font-semibold text-gray-700">
+                        {social.name}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </>
+            )
+          }
+        </div>
+
+        <!-- Interests Card -->
+        <div
+          class="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+        >
+          <h2 class="card-title text-lg font-bold mb-5 text-gray-900">
+            Interests
+          </h2>
+          <div class="flex flex-wrap gap-2.5">
+            {
+              interests.map((interest) => (
+                <span class="px-4 py-2 bg-gray-50 border border-gray-100 text-gray-700 rounded-xl text-sm font-semibold">
+                  {interest.name}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Education Card -->
+        <div
+          class="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+        >
+          <h2 class="card-title text-xl font-bold mb-6 text-gray-900">
+            Education
+          </h2>
+          <div class="space-y-6">
+            {
+              education.map((edu) => (
+                <div class="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2 before:w-2 before:h-2 before:border-2 before:border-gray-300 before:rounded-full">
+                  <h3 class="font-bold text-sm text-gray-900">{edu.level}</h3>
+                  <div class="text-gray-600 text-sm mt-1">{edu.details}</div>
+                  <div class="text-gray-400 text-xs font-medium mt-1">
+                    {edu.institution} • {edu.year}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
       </div>
 
+      <!-- Right column: Experience + Tech Stack -->
+      <div class="lg:col-span-2 flex flex-col gap-6">
+      <!-- Experience Card -->
       <div
-        class="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 flex-1 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-center"
+        class="bg-white rounded-3xl p-8 shadow-sm border border-gray-200 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
       >
-        <h2 class="text-lg font-bold mb-5 text-gray-900">Interests</h2>
-        <div class="flex flex-wrap gap-2.5">
+        <h2 class="section-title text-2xl font-bold mb-8 text-gray-900">
+          Experience
+        </h2>
+        <div class="space-y-8">
           {
-            interests.map((interest) => (
-              <span class="px-4 py-2 bg-gray-50 border border-gray-100 text-gray-700 rounded-xl text-sm font-semibold">
-                {interest.name}
-              </span>
-            ))
+            experience.map((exp) => {
+              const visiblePoints = exp.points.slice(0, 4);
+              const hiddenPoints = exp.points.slice(4);
+              return (
+                <div class="relative pl-6 before:content-[''] before:absolute before:left-0 before:top-2 before:w-2 before:h-2 before:bg-blue-500 before:rounded-full after:content-[''] after:absolute after:left-[3px] after:top-4 after:w-0.5 after:h-full after:bg-gray-100 last:after:hidden">
+                  <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
+                    <div>
+                      <h3 class="card-title font-bold text-xl text-gray-900">
+                        {exp.role}
+                      </h3>
+                      <div class="text-gray-500 font-semibold mt-1">
+                        {exp.company}
+                      </div>
+                    </div>
+                    <span class="text-xs font-bold text-gray-500 bg-gray-100 px-3 py-1.5 rounded-full shrink-0">
+                      {exp.period}
+                    </span>
+                  </div>
+                  <ul class="list-none text-gray-600 text-sm space-y-2 mt-4">
+                    {visiblePoints.map((point) => (
+                      <li
+                        class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full"
+                        set:html={highlightExperienceText(point)}
+                      />
+                    ))}
+                  </ul>
+                  {hiddenPoints.length > 0 && (
+                    <details class="mt-3 group">
+                      <summary class="cursor-pointer text-xs font-semibold text-gray-500 hover:text-blue-600 transition list-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 rounded">
+                        Show more
+                      </summary>
+                      <ul class="list-none text-gray-600 text-sm space-y-2 mt-3">
+                        {hiddenPoints.map((point) => (
+                          <li
+                            class="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-gray-300 before:rounded-full"
+                            set:html={highlightExperienceText(point)}
+                          />
+                        ))}
+                      </ul>
+                    </details>
+                  )}
+                </div>
+              );
+            })
           }
         </div>
       </div>
-    </div>
 
-    <!-- Row 3 -->
-    <!-- Skills Card -->
-    <div
-      class="md:col-span-1 lg:col-span-2 bg-white rounded-3xl p-8 shadow-sm border border-gray-200 flex flex-col justify-center transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
-    >
-      <h2 class="text-2xl font-bold mb-6 text-gray-900">Tech Stack</h2>
+      <!-- Skills Card -->
+      <div
+        class="bg-white rounded-3xl p-8 shadow-sm border border-gray-200 flex flex-col justify-center transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+      >
+      <h2 class="section-title text-2xl font-bold mb-6 text-gray-900">Tech Stack</h2>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
         <div class="min-w-0 flex flex-col sm:items-start">
           <h3
@@ -342,25 +397,7 @@ const highlightExperienceText = (value) => {
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- Education Card -->
-    <div
-      class="md:col-span-1 lg:col-span-1 bg-white rounded-3xl p-6 shadow-sm border border-gray-200 flex flex-col justify-center transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
-    >
-      <h2 class="text-xl font-bold mb-6 text-gray-900">Education</h2>
-      <div class="space-y-6">
-        {
-          education.map((edu) => (
-            <div class="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2 before:w-2 before:h-2 before:border-2 before:border-gray-300 before:rounded-full">
-              <h3 class="font-bold text-sm text-gray-900">{edu.level}</h3>
-              <div class="text-gray-600 text-sm mt-1">{edu.details}</div>
-              <div class="text-gray-400 text-xs font-medium mt-1">
-                {edu.institution} • {edu.year}
-              </div>
-            </div>
-          ))
-        }
+      </div>
       </div>
     </div>
 
