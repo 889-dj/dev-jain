@@ -56,7 +56,8 @@ const highlightExperienceText = (value) => {
   >
     <!-- Row 1 -->
     <!-- Profile / Hero Card -->
-    <div
+    <section
+      aria-labelledby="profile-heading"
       class="md:col-span-2 lg:col-span-3 bg-white rounded-3xl p-8 shadow-sm border border-gray-200 flex flex-col justify-center transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
     >
       <div class="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
@@ -67,6 +68,7 @@ const highlightExperienceText = (value) => {
         />
         <div class="text-center sm:text-left">
           <h1
+            id="profile-heading"
             class="section-title text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-gray-900"
           >
             {profile.name}
@@ -97,7 +99,7 @@ const highlightExperienceText = (value) => {
           </a>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Row 2 -->
     <!-- Left column: Contact, Connect, Interests, Education (natural heights, no stretch) -->
@@ -106,9 +108,11 @@ const highlightExperienceText = (value) => {
     >
       <div class="lg:col-span-1 flex flex-col gap-6">
         <!-- Contact Card -->
-        <div
+        <section
+          aria-labelledby="contact-heading"
           class="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 flex flex-col gap-4 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
         >
+          <h2 id="contact-heading" class="sr-only">Contact</h2>
           {
             details.map((detail) => (
               <div class="flex items-center gap-4">
@@ -126,7 +130,7 @@ const highlightExperienceText = (value) => {
                   )}
                 </div>
                 <div class="overflow-hidden">
-                  <div class="detail-label text-[11px] text-gray-400 uppercase tracking-widest font-bold mb-0.5">
+                  <div class="detail-label text-[11px] text-gray-500 uppercase tracking-widest font-bold mb-0.5">
                     {detail.type}
                   </div>
                   {detail.url && detail.url !== "#" ? (
@@ -145,13 +149,14 @@ const highlightExperienceText = (value) => {
               </div>
             ))
           }
-        </div>
+        </section>
 
         <!-- Connect Card -->
-        <div
+        <section
+          aria-labelledby="connect-heading"
           class="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
         >
-          <h2 class="card-title text-lg font-bold mb-5 text-gray-900">
+          <h2 id="connect-heading" class="card-title text-lg font-bold mb-5 text-gray-900">
             Connect
           </h2>
           {
@@ -209,13 +214,14 @@ const highlightExperienceText = (value) => {
               </>
             )
           }
-        </div>
+        </section>
 
         <!-- Interests Card -->
-        <div
+        <section
+          aria-labelledby="interests-heading"
           class="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
         >
-          <h2 class="card-title text-lg font-bold mb-5 text-gray-900">
+          <h2 id="interests-heading" class="card-title text-lg font-bold mb-5 text-gray-900">
             Interests
           </h2>
           <div class="flex flex-wrap gap-2.5">
@@ -227,13 +233,14 @@ const highlightExperienceText = (value) => {
               ))
             }
           </div>
-        </div>
+        </section>
 
         <!-- Education Card -->
-        <div
+        <section
+          aria-labelledby="education-heading"
           class="bg-white rounded-3xl p-6 shadow-sm border border-gray-200 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
         >
-          <h2 class="card-title text-xl font-bold mb-6 text-gray-900">
+          <h2 id="education-heading" class="card-title text-xl font-bold mb-6 text-gray-900">
             Education
           </h2>
           <div class="space-y-6">
@@ -242,23 +249,24 @@ const highlightExperienceText = (value) => {
                 <div class="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2 before:w-2 before:h-2 before:border-2 before:border-gray-300 before:rounded-full">
                   <h3 class="font-bold text-sm text-gray-900">{edu.level}</h3>
                   <div class="text-gray-600 text-sm mt-1">{edu.details}</div>
-                  <div class="text-gray-400 text-xs font-medium mt-1">
+                  <div class="text-gray-500 text-xs font-medium mt-1">
                     {edu.institution} • {edu.year}
                   </div>
                 </div>
               ))
             }
           </div>
-        </div>
+        </section>
       </div>
 
       <!-- Right column: Experience + Tech Stack -->
       <div class="lg:col-span-2 flex flex-col gap-6">
       <!-- Experience Card -->
-      <div
+      <section
+        aria-labelledby="experience-heading"
         class="bg-white rounded-3xl p-8 shadow-sm border border-gray-200 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
       >
-        <h2 class="section-title text-2xl font-bold mb-8 text-gray-900">
+        <h2 id="experience-heading" class="section-title text-2xl font-bold mb-8 text-gray-900">
           Experience
         </h2>
         <div class="space-y-8">
@@ -309,17 +317,18 @@ const highlightExperienceText = (value) => {
             })
           }
         </div>
-      </div>
+      </section>
 
       <!-- Skills Card -->
-      <div
+      <section
+        aria-labelledby="skills-heading"
         class="bg-white rounded-3xl p-8 shadow-sm border border-gray-200 flex flex-col justify-center transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
       >
-      <h2 class="section-title text-2xl font-bold mb-6 text-gray-900">Tech Stack</h2>
+      <h2 id="skills-heading" class="section-title text-2xl font-bold mb-6 text-gray-900">Tech Stack</h2>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
         <div class="min-w-0 flex flex-col sm:items-start">
           <h3
-            class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4 truncate w-full text-left"
+            class="text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-4 truncate w-full text-left"
             title="Languages & Frameworks"
           >
             Languages & Frameworks
@@ -334,6 +343,8 @@ const highlightExperienceText = (value) => {
                   <img
                     src={skill.icon}
                     alt={skill.name}
+                    loading="lazy"
+                    decoding="async"
                     class="w-full h-full object-contain"
                   />
                 </div>
@@ -343,7 +354,7 @@ const highlightExperienceText = (value) => {
         </div>
         <div class="min-w-0 flex flex-col sm:items-center">
           <h3
-            class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4 truncate w-full text-left sm:text-center"
+            class="text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-4 truncate w-full text-left sm:text-center"
             title="Backend & DB"
           >
             Backend & DB
@@ -358,6 +369,8 @@ const highlightExperienceText = (value) => {
                   <img
                     src={skill.icon}
                     alt={skill.name}
+                    loading="lazy"
+                    decoding="async"
                     class="w-full h-full object-contain"
                   />
                 </div>
@@ -367,7 +380,7 @@ const highlightExperienceText = (value) => {
         </div>
         <div class="min-w-0 flex flex-col sm:items-end">
           <h3
-            class="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4 truncate w-full text-left sm:text-right"
+            class="text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-4 truncate w-full text-left sm:text-right"
             title="Tools & Platforms"
           >
             Tools & Platforms
@@ -382,6 +395,8 @@ const highlightExperienceText = (value) => {
                   <img
                     src={skill.icon}
                     alt={skill.name}
+                    loading="lazy"
+                    decoding="async"
                     class="w-full h-full object-contain"
                   />
                 </div>
@@ -390,7 +405,7 @@ const highlightExperienceText = (value) => {
           </div>
         </div>
       </div>
-      </div>
+      </section>
       </div>
     </div>
 
@@ -398,8 +413,11 @@ const highlightExperienceText = (value) => {
     <!-- Projects Card -->
     {
       projects.length > 0 && (
-        <div class="md:col-span-2 lg:col-span-3 bg-white rounded-3xl p-8 shadow-sm border border-gray-200 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-          <h2 class="section-title text-2xl font-bold mb-8 text-gray-900">
+        <section
+          aria-labelledby="projects-heading"
+          class="md:col-span-2 lg:col-span-3 bg-white rounded-3xl p-8 shadow-sm border border-gray-200 transform transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+        >
+          <h2 id="projects-heading" class="section-title text-2xl font-bold mb-8 text-gray-900">
             Featured Projects
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -455,7 +473,7 @@ const highlightExperienceText = (value) => {
               </div>
             ))}
           </div>
-        </div>
+        </section>
       )
     }
   </div>

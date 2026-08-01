@@ -89,11 +89,13 @@ const {
       [data-theme="dark"] .text-gray-900 {
         color: #f9fafb !important;
       }
-      [data-theme="dark"] h1.text-gray-900,
-      [data-theme="dark"] h2.text-gray-900,
-      [data-theme="dark"] h3.text-gray-900 {
+      /* Reserve the strongest accent for section titles; card titles stay quiet */
+      [data-theme="dark"] .section-title.text-gray-900 {
         color: #a855f7 !important;
-      } /* Purple heading */
+      }
+      [data-theme="dark"] .card-title.text-gray-900 {
+        color: #f9fafb !important;
+      }
       [data-theme="dark"] .text-gray-800,
       [data-theme="dark"] .text-gray-700 {
         color: #e5e7eb !important;
@@ -105,7 +107,7 @@ const {
         color: #9ca3af !important;
       }
       [data-theme="dark"] .text-gray-400 {
-        color: #6b7280 !important;
+        color: #9ca3af !important;
       }
       [data-theme="dark"] .detail-label {
         color: #a855f7 !important;
@@ -165,6 +167,32 @@ const {
       }
       [data-theme="dark"] .hover\:bg-indigo-100:hover {
         background-color: #3730a3 !important;
+      }
+
+      /* Visible keyboard focus on all interactive elements */
+      a:focus-visible,
+      button:focus-visible,
+      summary:focus-visible {
+        outline: 2px solid #7c3aed;
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+      [data-theme="dark"] a:focus-visible,
+      [data-theme="dark"] button:focus-visible,
+      [data-theme="dark"] summary:focus-visible {
+        outline-color: #c084fc;
+      }
+
+      /* Respect reduced-motion preference: disable non-essential motion */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
       }
     </style>
   </head>
