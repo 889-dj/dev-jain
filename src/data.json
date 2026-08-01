@@ -10,7 +10,7 @@
       { "yellow": "./images/avatar-yellow.png" },
       { "purple": "./images/avatar-purple.png" }
     ],
-    "bio": "Full-Stack & Native Apps Engineer specializing in the JavaScript ecosystem (React Native, Next.js, MERN). I bridge the gap between high-level vision and production-ready systems, focusing on scalable architecture, performance, and rapid product iteration to drive long-term business growth."
+    "bio": "React Native + Next.js engineer. I ship mobile and web products end-to-end — from UI to CI/CD deployment."
   },
   "interests": [
     { "name": "React Native" },
@@ -89,26 +89,6 @@
       "details": "BTech in Computer Science",
       "institution": "Madhav Institute of Technology and Science, Gwalior",
       "year": "2021-2024"
-    }
-  ],
-  "projects": [
-    {
-      "title": "E-commerce Platform API",
-      "description": "A scalable RESTful API for an e-commerce site using Node.js, Express, and MongoDB.",
-      "image": "./images/ecommerce-project.png",
-      "link": "#"
-    },
-    {
-      "title": "Real-time Chat Application",
-      "description": "A full-stack chat app featuring WebSockets, React for the frontend, and user authentication.",
-      "image": "./images/chat-project.png",
-      "link": "#"
-    },
-    {
-      "title": "Cloud Deployment Automation",
-      "description": "CI/CD pipeline using GitHub Actions to automate testing and deployment to AWS.",
-      "image": "./images/cloud-project.png",
-      "link": "#"
     }
   ],
   "portfolio": [
