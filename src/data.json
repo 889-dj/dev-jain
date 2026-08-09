@@ -28,12 +28,12 @@
       "role": "Software Engineer",
       "period": "Aug 2025 - Present",
       "points": [
-        "Streamlined the development-to-deployment pipeline, implementing CI/CD and OTA updates that cut internal testing cycles by 20%.",
-        "Migrated legacy architecture to a modern, scalable architecture, significantly improving overall app performance and maintainability.",
-        "Transformed the codebase to be agent-ready, enabling faster feature delivery while reducing token consumption by 45%.",
-        "Designed and implemented a CI/CD pipeline for mobile updates and automated testing using Maestro with EAS Workflows and GitHub Actions, improving release reliability and speed.",
-        "Ideated and delivered slot machine and shuffle card game features end-to-end, including backend implementation, resulting in a 10% increase in app engagement.",
-        "Built AI agents (AI employees) with Hermes and owned end-to-end production delivery for sales, marketing, product management, and fundraising workflows; deployed cost-efficiently on Azure Container Apps and significantly improved daily productivity for the CEO and CMO."
+        "Owned the development-to-deployment pipeline, implementing CI/CD and OTA updates with Maestro, EAS Workflows, and GitHub Actions — cutting internal testing cycles by 20% and shipping app updates without a Store submission for every iteration.",
+        "Migrated the app off the Ignite boilerplate to Expo Router, replacing a centralized navigator config with file-based routing bringing typed routes, automatic deep linking, and lazy bundling, and making navigation changes local to the files they affect instead of a single sprawling navigator.",
+        "Made the codebase agent-ready by authoring AGENTS.md and SKILLS.md encoding our coding conventions and Expo-specific patterns so AI coding agents produce work that matches house style, cutting review churn and token usage.",
+        "Built and shipped production AI agents with Hermes on Azure Container Apps, running real sales, marketing, product, and fundraising workflows — the app engagement and downloads rose ~4x (measured in Mixpanel).",
+        "Cut download size by 60% on iOS and 44% on Android — measured against actual App Store and Play Store download sizes before and after noticeably reducing install friction.",
+        "Implemented client-side feature flagging with Statsig, letting the team gate UI on time-boxed campaigns (e.g. World Cup-specific elements) and ship them without a new release."
       ]
     },
     {
@@ -42,9 +42,9 @@
       "role": "Software Engineer Intern",
       "period": "Jan 2025 - Jul 2025",
       "points": [
-        "Architected the frontend for the 'Planet Points' product launch using React Native, driving a 30% growth in user acquisition.",
-        "Rapidly engineered and deployed the 'Receipt Scanning' ecosystem within a 2-week sprint, driving a 15% surge in daily active usage.",
-        "Executed a comprehensive optimization of the application architecture, slashing the app bundle size by 100 MB."
+        "Built the React Native frontend for the 'Planet Points' product launch — translated designs into a polished, production-ready mobile interface that shipped to pilot users.",
+        "Shipped the 'Receipt Scanning' feature end-to-end in a 2-week sprint, integrating camera-based OCR with backend reward APIs to take users from capture to reward in a single flow.",
+        "Audited legacy dependencies and unoptimized assets across the app, cutting bundle size by 100 MB — measurably faster builds and a lighter install for users on constrained devices and networks."
       ]
     },
     {
