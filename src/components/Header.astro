@@ -1,11 +1,12 @@
 ---
+// Absolute paths so the nav also works from /blog/*; the anchors match the
+// section heading ids rendered on the homepage.
 const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#blog', label: 'Blog' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#experience-heading', label: 'Experience' },
+  { href: '/#skills-heading', label: 'Skills' },
+  { href: '/#interests-heading', label: 'Interests' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/#contact-heading', label: 'Contact' },
 ];
 ---
 
@@ -136,7 +137,9 @@ const navLinks = [
     transition: opacity var(--transition), transform 0.3s ease;
   }
 
-  [data-theme="light"] .moon { display: none; }
+  /* Light mode carries no data-theme attribute, so hide the moon by default. */
+  .moon { display: none; }
+  [data-theme="dark"] .moon { display: block; }
   [data-theme="dark"] .sun { display: none; }
 
   .mobile-toggle {
@@ -205,18 +208,22 @@ const navLinks = [
   const mobileToggle = document.getElementById('mobileToggle');
   const mobileNav = document.getElementById('mobileNav');
 
+  // Shares the storage key and the "light = no attribute" convention with the
+  // floating toggle in BaseLayout so the two never disagree.
   function setTheme(theme: string) {
-    html.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+    if (theme === 'dark') {
+      html.setAttribute('data-theme', 'dark');
+    } else {
+      html.removeAttribute('data-theme');
+    }
+    localStorage.setItem('portfolio-theme', theme);
   }
 
-  const stored = localStorage.getItem('theme');
+  const stored = localStorage.getItem('portfolio-theme');
   if (stored) {
     setTheme(stored);
   } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     setTheme('dark');
-  } else {
-    setTheme('light');
   }
 
   toggle?.addEventListener('click', () => {

@@ -25,6 +25,12 @@ const highlightExperienceText = (value) => {
     "Next.js",
     "Node.js",
     "SQL",
+    "Expo Router",
+    "Statsig",
+    "Mixpanel",
+    "OCR",
+    "AGENTS.md",
+    "SKILLS.md",
   ];
 
   const normalized = value.replaceAll("&#39;", "'").replaceAll("&apos;", "'");
@@ -34,8 +40,10 @@ const highlightExperienceText = (value) => {
     .map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
     .join("|");
 
+  // The trailing lookahead keeps the unit inside the bold ("20%", "100 MB")
+  // while still refusing partial matches like the "3" in "3D".
   const withNumbersHighlighted = escaped.replace(
-    /\b\d+(?:\.\d+)?(?:\s?(?:%|MB|GB|K|k|x|X))?\b/g,
+    /\b\d+(?:\.\d+)?(?:\s?(?:%|MB|GB|K|k|x|X))?(?![A-Za-z0-9])/g,
     (match) => `<strong>${match}</strong>`,
   );
 
@@ -64,6 +72,9 @@ const highlightExperienceText = (value) => {
         <img
           src={profile.image[0].black}
           alt={profile.name}
+          width="112"
+          height="112"
+          fetchpriority="high"
           class="w-28 h-28 rounded-full bg-gray-100 object-cover shadow-inner shrink-0"
         />
         <div class="text-center sm:text-left">
@@ -76,9 +87,11 @@ const highlightExperienceText = (value) => {
           <p class="text-gray-600 leading-relaxed text-lg mb-6">
             {profile.bio}
           </p>
+          <div class="flex flex-wrap gap-3 justify-center sm:justify-start">
           <a
             href="https://drive.google.com/file/d/1QbYRIPiXyfFjMNGtq68Rqa6Be8jo6x8K/view?usp=sharing"
             target="_blank"
+            rel="noopener noreferrer"
             class="inline-flex items-center justify-center gap-2 bg-black text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition shadow-md hover:-translate-y-0.5"
           >
             <svg
@@ -97,6 +110,13 @@ const highlightExperienceText = (value) => {
             </svg>
             Download CV
           </a>
+          <a
+            href="/blog"
+            class="inline-flex items-center justify-center gap-2 bg-white text-gray-900 border border-gray-200 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition shadow-sm hover:-translate-y-0.5"
+          >
+            Read the Blog
+          </a>
+          </div>
         </div>
       </div>
     </section>
@@ -121,6 +141,8 @@ const highlightExperienceText = (value) => {
                     <img
                       src={detail.icon}
                       alt={detail.type}
+                      width="20"
+                      height="20"
                       class="w-5 h-5 opacity-70 object-contain"
                     />
                   ) : (
@@ -171,6 +193,8 @@ const highlightExperienceText = (value) => {
                     <img
                       src={social.icon}
                       alt={social.name}
+                      width="24"
+                      height="24"
                       class="w-6 h-6 object-contain"
                     />
                   </a>
@@ -188,7 +212,9 @@ const highlightExperienceText = (value) => {
                       <img
                         src={social.icon}
                         alt={social.name}
-                        class="w-6 h-6 object-contain"
+                        width="24"
+                      height="24"
+                      class="w-6 h-6 object-contain"
                       />
                     </a>
                   ))}
@@ -203,7 +229,9 @@ const highlightExperienceText = (value) => {
                       <img
                         src={social.icon}
                         alt={social.name}
-                        class="w-6 h-6 object-contain"
+                        width="24"
+                      height="24"
+                      class="w-6 h-6 object-contain"
                       />
                       <span class="font-semibold text-gray-700">
                         {social.name}
@@ -345,6 +373,8 @@ const highlightExperienceText = (value) => {
                     alt={skill.name}
                     loading="lazy"
                     decoding="async"
+                    width="40"
+                    height="40"
                     class="w-full h-full object-contain"
                   />
                 </div>
@@ -371,6 +401,8 @@ const highlightExperienceText = (value) => {
                     alt={skill.name}
                     loading="lazy"
                     decoding="async"
+                    width="40"
+                    height="40"
                     class="w-full h-full object-contain"
                   />
                 </div>
@@ -397,6 +429,8 @@ const highlightExperienceText = (value) => {
                     alt={skill.name}
                     loading="lazy"
                     decoding="async"
+                    width="40"
+                    height="40"
                     class="w-full h-full object-contain"
                   />
                 </div>

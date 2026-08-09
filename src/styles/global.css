@@ -12,6 +12,50 @@
   }
 }
 
+/* Design tokens — consumed by Header.astro and the blog pages */
+:root {
+  --nav-height: 4rem;
+  --bg: #f3f4f6;
+  --bg-secondary: #f9fafb;
+  --card-bg: #ffffff;
+  --code-bg: #f1f5f9;
+  --text: #111827;
+  --text-secondary: #4b5563;
+  --border: #e5e7eb;
+  --accent: #2563eb;
+  --tag-bg: #f3f4f6;
+  --tag-text: #4b5563;
+  --timeline-line: #e5e7eb;
+  --timeline-dot: #2563eb;
+  --radius: 1rem;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --card-shadow: 0 10px 25px -12px rgb(15 23 42 / 0.25);
+}
+
+[data-theme='dark'] {
+  --bg: #111827;
+  --bg-secondary: #1f2937;
+  --card-bg: #1f2937;
+  --code-bg: #0b1220;
+  --text: #f9fafb;
+  --text-secondary: #9ca3af;
+  --border: #374151;
+  --accent: #60a5fa;
+  --tag-bg: #374151;
+  --tag-text: #d1d5db;
+  --timeline-line: #374151;
+  --timeline-dot: #60a5fa;
+  --card-shadow: 0 10px 25px -12px rgb(0 0 0 / 0.6);
+}
+
+/* Shared page wrapper used by the blog pages */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
 /* Custom scrollbar for webkit (optional but looks nice) */
 ::-webkit-scrollbar {
   width: 8px;

@@ -5,16 +5,18 @@ export const siteConfig = {
   url: 'https://devjain.in',
   ogImage: '/og-image.png',
   email: 'devjain2200@gmail.com',
+  devtoUsername: 'dev_jain',
   social: {
     github: 'https://github.com/889-dj',
     linkedin: 'https://www.linkedin.com/in/dev-jain1',
     twitter: 'https://x.com/Devjtwt786',
+    devto: 'https://dev.to/dev_jain',
   },
   navLinks: [
-    { label: 'Work', href: '#projects' },
-    { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Thinking', href: '#philosophy' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Experience', href: '/#experience-heading' },
+    { label: 'Skills', href: '/#skills-heading' },
+    { label: 'Interests', href: '/#interests-heading' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Contact', href: '/#contact-heading' },
   ],
 };

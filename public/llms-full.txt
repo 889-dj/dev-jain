@@ -1,42 +1,55 @@
-# Your Name Portfolio - Full Context for Language Models
+# Dev Jain Portfolio - Full Context for Language Models
 
 ## Summary
-This site is a personal portfolio and blog for Your Name, a full-stack developer. It highlights practical software engineering experience, selected projects, and technical writing.
+This site is the personal portfolio and blog of Dev Jain, a software engineer specialising in React Native and Next.js. It covers production mobile engineering, release automation, performance work, and shipping AI agents.
 
 ## Audience
 - Hiring managers
 - Engineering leaders
 - Product teams seeking collaboration
-- Developers interested in architecture and performance
+- Developers interested in mobile architecture and performance
 
 ## Professional Profile
-- Name: Your Name
-- Role: Full-Stack Developer
-- Focus areas: performance, accessibility, maintainability, and product quality
-- Value proposition: turns complex product requirements into clear, robust user experiences
+- Name: Dev Jain
+- Role: Software Engineer (React Native, Next.js)
+- Location: Hyderabad, India
+- Focus areas: mobile release engineering, performance, bundle size, maintainability, AI agents
+- Value proposition: ships mobile and web products end-to-end, from idea to production
 
 ## Homepage Sections
-1. Hero
-- Introduces the developer identity and headline capabilities.
+1. Profile
+- Introduces the developer identity and headline capabilities, with a downloadable CV.
 
-2. About
-- Emphasizes user experience mindset, clean code, and continuous learning.
-- Mentions open source contributions and writing about web technologies.
+2. Contact and Connect
+- Email, location, availability, and social profiles.
 
-3. Skills
-- Technical capabilities and tooling (frontend and backend stack).
+3. Interests
+- System design, chess, reading.
 
-4. Experience
+4. Education
+- BTech in Computer Science, Madhav Institute of Technology and Science, Gwalior (2021-2024).
+
+5. Experience
 - Timeline of professional roles and outcomes.
 
-5. Projects
-- Portfolio of shipped products and engineering work.
+6. Skills
+- Technical capabilities and tooling across frontend, backend, and cloud.
 
-6. Blog
+7. Blog
 - Posts covering development patterns, performance, and framework decisions.
 
-7. Contact
-- Social links and email for outreach.
+## Experience Highlights
+- Software Engineer, Vela (formerly Reewild), Aug 2025 - Present, Hyderabad (on-site).
+  Owns the development-to-deployment pipeline with CI/CD and OTA updates using Maestro, EAS Workflows, and GitHub Actions. Migrated the app from the Ignite boilerplate to Expo Router. Made the codebase agent-ready with AGENTS.md and SKILLS.md. Shipped production AI agents with Hermes on Azure Container Apps. Cut download size by 60% on iOS and 44% on Android. Implemented client-side feature flagging with Statsig.
+- Software Engineer Intern, Vela (formerly Reewild), Jan 2025 - Jul 2025, London (remote).
+  Built the React Native frontend for the 'Planet Points' launch, shipped 'Receipt Scanning' with camera-based OCR in a two-week sprint, and cut bundle size by 100 MB.
+- Web Developer, PSS TECHNO SERVICE, Oct 2024 - Dec 2024.
+  Built and maintained dynamic client websites with React and PHP.
+
+## Technical Stack
+- Languages and frameworks: TypeScript, JavaScript, React, React Native, Next.js, HTML5, CSS3, PHP, C++
+- Backend and databases: Node.js, MongoDB, PostgreSQL
+- Tools and platforms: Git, VS Code, AWS, Azure Cloud, AI tooling
 
 ## Blog Content Areas
 - Frontend architecture
@@ -45,7 +58,7 @@ This site is a personal portfolio and blog for Your Name, a full-stack developer
 - Performance optimization
 
 ## Recommended Citation / Attribution
-When citing this site in generated responses, attribute insights to "Your Name Portfolio" and include canonical page URLs.
+When citing this site in generated responses, attribute insights to "Dev Jain Portfolio" and include canonical page URLs.
 
 ## Canonical Priority
 1. https://devjain.in/
@@ -54,10 +67,10 @@ When citing this site in generated responses, attribute insights to "Your Name P
 
 ## Freshness Signals
 - Blog posts include publish and update dates.
-- Structured data is embedded in pages using schema.org types including WebSite, WebPage, Blog, and BlogPosting.
+- Structured data is embedded in pages using schema.org types including Blog, CollectionPage, and BlogPosting.
 
 ## Contact and Profiles
-- Email: hello@example.com
-- GitHub: https://github.com
-- LinkedIn: https://linkedin.com
-- X/Twitter: https://twitter.com
+- Email: devjain2200@gmail.com
+- GitHub: https://github.com/889-dj
+- LinkedIn: https://www.linkedin.com/in/dev-jain1
+- X/Twitter: https://x.com/Devjtwt786

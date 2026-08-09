@@ -1,17 +1,29 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Header from "../../components/Header.astro";
 import { getCollection } from "astro:content";
 
-const allPosts = (await getCollection("blog"))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .filter((post) => !post.data.draft);
+const localPosts = (await getCollection("blog")).map((post) => ({
+  id: post.id,
+  data: post.data,
+  source: "local" as const,
+}));
+
+// Cross-posted dev.to articles are rendered on-site, so they join the same list.
+const devtoPosts = (await getCollection("devto")).map((post) => ({
+  id: post.id,
+  data: post.data,
+  source: "devto" as const,
+}));
+
+const allPosts = [...localPosts, ...devtoPosts]
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const blogSchema = {
   "@type": "Blog",
   "@id": "https://devjain.in/blog/#blog",
   url: "https://devjain.in/blog",
-  name: "Your Name Blog",
+  name: "Dev Jain Blog",
   description:
     "Articles about software engineering, frontend architecture, and performance.",
   inLanguage: "en-US",
@@ -21,7 +33,7 @@ const blogCollectionSchema = {
   "@type": "CollectionPage",
   "@id": "https://devjain.in/blog/#collection",
   url: "https://devjain.in/blog",
-  name: "Blog - Your Name",
+  name: "Blog - Dev Jain",
   hasPart: allPosts.map((post) => ({
     "@type": "BlogPosting",
     headline: post.data.title,
@@ -33,7 +45,7 @@ const blogCollectionSchema = {
 ---
 
 <BaseLayout
-  title="Blog - Your Name"
+  title="Blog - Dev Jain"
   description="Technical writing on web development, architecture, and developer tooling."
   canonicalPath="/blog"
   keywords={[
@@ -44,9 +56,9 @@ const blogCollectionSchema = {
   ]}
   schema={[blogSchema, blogCollectionSchema]}
 >
-  <Header />
-  <main class="blog-page">
+  <div class="blog-page">
     <div class="container">
+      <a href="/" class="back-link">← Back to home</a>
       <h1 class="page-title">Blog</h1>
       <p class="page-subtitle">
         Thoughts on development, design, and building for the web.
@@ -64,6 +76,9 @@ const blogCollectionSchema = {
                     day: "numeric",
                   })}
                 </time>
+                {post.source === "devto" && (
+                  <span class="post-source">dev.to</span>
+                )}
               </div>
               <h2 class="post-title">{post.data.title}</h2>
               <p class="post-desc">{post.data.description}</p>
@@ -78,13 +93,24 @@ const blogCollectionSchema = {
         )
       }
     </div>
-  </main>
+  </div>
 </BaseLayout>
 
 <style>
   .blog-page {
-    padding-top: calc(var(--nav-height) + 3rem);
+    padding-top: 3rem;
     min-height: 100vh;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+
+  .back-link:hover {
+    color: var(--accent);
   }
 
   .page-title {
@@ -124,9 +150,25 @@ const blogCollectionSchema = {
     color: inherit;
   }
 
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
   .post-meta time {
     font-size: 0.8rem;
     color: var(--text-secondary);
+  }
+
+  .post-source {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.1rem 0.45rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--accent);
   }
 
   .post-title {

@@ -1,39 +1,65 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Header from "../../components/Header.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  return posts.map((post) => ({
+  const localPosts = await getCollection("blog");
+  const devtoPosts = await getCollection("devto");
+
+  // Local markdown always wins a slug clash with a cross-posted article.
+  const localIds = new Set(localPosts.map((post) => post.id));
+
+  const paths = localPosts.map((post) => ({
     params: { slug: post.id },
-    props: post,
+    props: { post, devtoUrl: undefined as string | undefined },
   }));
+
+  for (const post of devtoPosts) {
+    if (localIds.has(post.id)) {
+      console.warn(
+        `[blog] dev.to article "${post.id}" collides with a local post; keeping the local one.`,
+      );
+      continue;
+    }
+    paths.push({
+      params: { slug: post.id },
+      props: { post, devtoUrl: post.data.devtoUrl },
+    });
+  }
+
+  return paths;
 }
 
-const post = Astro.props as CollectionEntry<"blog">;
+const { post, devtoUrl } = Astro.props as {
+  post: CollectionEntry<"blog"> | CollectionEntry<"devto">;
+  devtoUrl?: string;
+};
 const renderedHtml = post.rendered?.html ?? "";
 const canonicalPath = `/blog/${post.id}`;
 const publishedTime = post.data.date.toISOString();
 const modifiedTime = (post.data.updatedDate ?? post.data.date).toISOString();
+const coverImage = "coverImage" in post.data ? post.data.coverImage : undefined;
+
+// Cross-posted articles point search engines back at the dev.to original.
+const canonicalUrl = devtoUrl ?? `https://devjain.in${canonicalPath}`;
 
 const blogPostingSchema = {
   "@type": "BlogPosting",
-  "@id": `https://devjain.in${canonicalPath}#blogposting`,
-  mainEntityOfPage: `https://devjain.in${canonicalPath}`,
+  "@id": `${canonicalUrl}#blogposting`,
+  mainEntityOfPage: canonicalUrl,
   headline: post.data.title,
   description: post.data.description,
   datePublished: publishedTime,
   dateModified: modifiedTime,
   author: {
     "@type": "Person",
-    name: "Your Name",
+    name: "Dev Jain",
     url: "https://devjain.in/",
   },
   publisher: {
     "@type": "Person",
-    name: "Your Name",
+    name: "Dev Jain",
   },
   keywords: post.data.tags?.join(", "),
   inLanguage: "en-US",
@@ -41,10 +67,10 @@ const blogPostingSchema = {
 ---
 
 <BaseLayout
-  title={`${post.data.title} - Your Name`}
+  title={`${post.data.title} - Dev Jain`}
   description={post.data.description}
   type="article"
-  canonicalPath={canonicalPath}
+  canonicalUrl={canonicalUrl}
   publishedTime={publishedTime}
   modifiedTime={modifiedTime}
   keywords={post.data.tags?.length
@@ -52,8 +78,7 @@ const blogPostingSchema = {
     : ["web development", "software engineering"]}
   schema={blogPostingSchema}
 >
-  <Header />
-  <main class="post-page">
+  <div class="post-page">
     <article class="container">
       <a href="/blog" class="back-link">← Back to blog</a>
       <header class="post-header">
@@ -68,15 +93,36 @@ const blogPostingSchema = {
         >
         <h1 class="post-title">{post.data.title}</h1>
         <p class="post-description">{post.data.description}</p>
+        {
+          devtoUrl && (
+            <p class="post-origin">
+              Originally published on{" "}
+              <a href={devtoUrl} target="_blank" rel="noopener noreferrer">
+                dev.to
+              </a>
+            </p>
+          )
+        }
       </header>
+      {
+        coverImage && (
+          <img
+            src={coverImage}
+            alt={post.data.title}
+            width="1000"
+            height="420"
+            class="post-cover"
+          />
+        )
+      }
       <div class="post-content" set:html={renderedHtml} />
     </article>
-  </main>
+  </div>
 </BaseLayout>
 
 <style>
   .post-page {
-    padding-top: calc(var(--nav-height) + 3rem);
+    padding-top: 3rem;
     min-height: 100vh;
   }
 
@@ -180,5 +226,55 @@ const blogPostingSchema = {
     background: var(--code-bg);
     padding: 0.15em 0.4em;
     border-radius: 4px;
+  }
+
+  .post-origin {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .post-origin a {
+    color: var(--accent);
+  }
+
+  .post-cover {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  /* dev.to bodies carry full-width images, tables and embeds */
+  .post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+  }
+
+  .post-content a {
+    color: var(--accent);
+  }
+
+  .post-content table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .post-content th,
+  .post-content td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+
+  .post-content iframe {
+    max-width: 100%;
   }
 </style>

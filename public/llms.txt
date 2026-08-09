@@ -1,24 +1,24 @@
-# Your Name Portfolio
+# Dev Jain Portfolio
 
-> Portfolio and technical blog for Your Name, a full-stack developer focused on fast, accessible web products.
+> Portfolio and technical blog for Dev Jain, a React Native and Next.js engineer who ships mobile and web products end-to-end.
 
 ## Primary URLs
-- / : Homepage with bio, skills, experience, projects, and contact methods.
+- / : Homepage with bio, contact details, interests, education, experience, and skills.
 - /blog : Blog index with technical articles.
 
 ## Topics
-- Frontend architecture
-- Full-stack development
-- Web performance
-- Accessibility
-- Astro
-- TypeScript
+- React Native and Expo
+- Mobile release engineering (CI/CD, OTA updates, EAS)
+- System design
+- Full-stack development with Next.js and Node.js
+- Performance and bundle-size optimization
+- AI agents in production
 
 ## Contact
-- Email: hello@example.com
-- GitHub: https://github.com
-- LinkedIn: https://linkedin.com
-- X/Twitter: https://twitter.com
+- Email: devjain2200@gmail.com
+- GitHub: https://github.com/889-dj
+- LinkedIn: https://www.linkedin.com/in/dev-jain1
+- X/Twitter: https://x.com/Devjtwt786
 
 ## Full Machine-Readable Context
 - /llms-full.txt

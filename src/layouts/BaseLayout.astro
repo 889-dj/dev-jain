@@ -6,35 +6,79 @@ const {
   title = siteConfig.title,
   description = siteConfig.description,
   ogImage = siteConfig.ogImage,
-  canonicalUrl = siteConfig.url,
+  canonicalPath,
+  canonicalUrl,
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  keywords = [],
+  schema,
 } = Astro.props;
+
+const siteUrl = siteConfig.url.replace(/\/$/, "");
+const resolvedCanonical =
+  canonicalUrl ?? `${siteUrl}${canonicalPath ?? Astro.url.pathname}`;
+
+// Astro.props.schema may be a single node or a list; normalise and wrap in a graph.
+const schemaNodes = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const jsonLd = schemaNodes.length
+  ? {
+      "@context": "https://schema.org",
+      "@graph": schemaNodes,
+    }
+  : null;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={siteConfig.name} />
-    <link rel="canonical" href={canonicalUrl} />
+    {keywords.length > 0 && (
+      <meta name="keywords" content={keywords.join(", ")} />
+    )}
+    <link rel="canonical" href={resolvedCanonical} />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={resolvedCanonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${siteConfig.url}${ogImage}`} />
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    {publishedTime && (
+      <meta property="article:published_time" content={publishedTime} />
+    )}
+    {modifiedTime && (
+      <meta property="article:modified_time" content={modifiedTime} />
+    )}
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${siteConfig.url}${ogImage}`} />
+    <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+
+    {
+      jsonLd && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(jsonLd)}
+        />
+      )
+    }
+
+    {/* Applied before first paint so dark mode never flashes white. */}
+    <script is:inline>
+      (() => {
+        const saved = localStorage.getItem("portfolio-theme");
+        if (saved === "dark") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
