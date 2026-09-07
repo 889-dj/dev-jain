@@ -1,0 +1,445 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const services = [
+  {
+    name: "Clerk",
+    purpose: "Auth",
+    receives: "Your email address, for account creation and sign-in",
+  },
+  {
+    name: "Neon (Postgres)",
+    purpose: "Storage",
+    receives:
+      "Your subscription entries and account record — our primary database",
+  },
+  {
+    name: "RevenueCat",
+    purpose: "Billing",
+    receives: "Your device's store purchase receipt and Pro entitlement status",
+  },
+  {
+    name: "Cloudinary",
+    purpose: "Storage",
+    receives: "Your profile photo, if you upload one",
+  },
+  {
+    name: "Logo.dev / Google",
+    purpose: "Lookup",
+    receives:
+      'The name of a subscription (e.g. "Spotify"), to find a matching logo image — no identifying data about you',
+  },
+  {
+    name: "OpenRouter",
+    purpose: "AI Insight",
+    receives:
+      'Aggregated category totals (e.g. "Entertainment: ₹800/mo") to generate the Insights tab\'s written summaries — never subscription names, your email, or any other identifier',
+  },
+  {
+    name: "Frankfurter (ECB)",
+    purpose: "Exchange Rate",
+    receives:
+      'Currency codes only (e.g. "USD", "INR"), to convert totals across currencies',
+  },
+  {
+    name: "Expo",
+    purpose: "Delivery",
+    receives: "A device push token, to deliver renewal reminder notifications",
+  },
+];
+
+const rights = [
+  {
+    title: "Access",
+    body: "Everything we hold about you is visible in the app itself — there's no hidden profile.",
+  },
+  {
+    title: "Correction",
+    body: "Edit or remove any subscription or account detail directly, any time.",
+  },
+  {
+    title: "Deletion",
+    body: "Delete your account in-app, or email us to request it done on your behalf.",
+  },
+  {
+    title: "Portability",
+    body: "Email us and we'll send your subscription data as a plain file.",
+  },
+];
+
+const toc = [
+  { id: "collect", label: "What we collect" },
+  { id: "not-collect", label: "What we don't" },
+  { id: "third-parties", label: "Who it goes to" },
+  { id: "use", label: "How it's used" },
+  { id: "retention", label: "Retention & deletion" },
+  { id: "security", label: "Security" },
+  { id: "rights", label: "Your rights" },
+  { id: "children", label: "Children" },
+  { id: "changes", label: "Changes" },
+  { id: "contact", label: "Contact" },
+];
+---
+
+<BaseLayout
+  title="subsTrack Privacy Policy — Dev Jain"
+  description="Privacy policy for subsTrack, a manual subscription tracker for iOS & Android."
+  canonicalPath="/privacy"
+>
+  <div class="max-w-[820px] w-full mx-auto py-12">
+    <section
+      class="bg-white rounded-3xl p-8 sm:p-10 shadow-sm border border-gray-200"
+    >
+      <div class="flex items-center gap-3 mb-6">
+        <div
+          class="w-9 h-9 rounded-xl bg-black flex items-center justify-center shrink-0"
+        >
+          <svg viewBox="0 0 24 24" fill="none" class="w-4.5 h-4.5">
+            <path
+              d="M4 12L10 18L20 6"
+              stroke="white"
+              stroke-width="2.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <span class="font-bold text-gray-900">subsTrack</span>
+      </div>
+
+      <h1
+        class="section-title text-4xl font-extrabold tracking-tight text-gray-900 mb-3"
+      >
+        Privacy Policy
+      </h1>
+      <p class="text-gray-600 text-lg mb-6 max-w-[60ch]">
+        What subsTrack collects when you track your own recurring subscriptions,
+        why, and how to make it stop.
+      </p>
+
+      <div
+        class="flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold text-gray-500 border-b border-gray-100 pb-6 mb-2"
+      >
+        <span><b class="text-gray-700">Effective</b> Sept 6, 2026</span>
+        <span
+          ><b class="text-gray-700">Applies to</b> iOS &amp; Android app, all versions</span
+        >
+        <span
+          ><b class="text-gray-700">Contact</b>
+          <a
+            href="mailto:devjain1.work@gmail.com"
+            class="hover:text-blue-600 transition">devjain1.work@gmail.com</a
+          ></span
+        >
+      </div>
+
+      <nav aria-label="Sections" class="flex flex-wrap gap-2 py-6">
+        {
+          toc.map((item, i) => (
+            <a
+              href={`#${item.id}`}
+              class="text-xs font-semibold text-gray-600 bg-gray-50 border border-gray-100 rounded-full px-3 py-1.5 hover:border-blue-300 hover:text-blue-600 transition"
+            >
+              {String(i + 1).padStart(2, "0")} {item.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="space-y-10">
+        <section id="collect" class="pt-6 border-t border-gray-100">
+          <span class="text-xs font-bold text-blue-600 tracking-wide">01</span>
+          <h2 class="card-title text-2xl font-bold text-gray-900 mt-1 mb-4">
+            What we collect
+          </h2>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            subsTrack is a manual subscription tracker: you tell it what you pay
+            for, and it does the remembering. Everything below is either
+            something you typed in, or something a service we use needs to do
+            its one job.
+          </p>
+
+          <h3 class="font-bold text-sm text-gray-900 mt-5 mb-2">Account</h3>
+          <ul class="list-disc pl-5 text-gray-600 text-sm space-y-1.5">
+            <li>
+              <b class="text-gray-800">Email address</b> — used by our authentication
+              provider, Clerk, to create and verify your account and let you sign
+              back in.
+            </li>
+          </ul>
+
+          <h3 class="font-bold text-sm text-gray-900 mt-5 mb-2">
+            Subscription entries
+          </h3>
+          <ul class="list-disc pl-5 text-gray-600 text-sm space-y-1.5">
+            <li>
+              Service name (e.g. "Netflix"), cost, currency, billing cycle, next
+              renewal date
+            </li>
+            <li>
+              Optional category, payment method label, and free-text notes you
+              add yourself
+            </li>
+          </ul>
+
+          <h3 class="font-bold text-sm text-gray-900 mt-5 mb-2">
+            Optional extras
+          </h3>
+          <ul class="list-disc pl-5 text-gray-600 text-sm space-y-1.5">
+            <li>
+              <b class="text-gray-800">Profile photo</b>, if you choose to
+              upload one
+            </li>
+            <li>
+              <b class="text-gray-800">Push notification token</b>, if you
+              enable renewal reminders — used only to address a notification to
+              your device
+            </li>
+          </ul>
+
+          <h3 class="font-bold text-sm text-gray-900 mt-5 mb-2">Purchases</h3>
+          <ul class="list-disc pl-5 text-gray-600 text-sm space-y-1.5">
+            <li>
+              Your Pro subscription status, handled by RevenueCat on top of
+              Apple's or Google's own purchase records. We never see or store
+              your payment card details.
+            </li>
+          </ul>
+        </section>
+
+        <section id="not-collect" class="pt-6 border-t border-gray-100">
+          <span class="text-xs font-bold text-blue-600 tracking-wide">02</span>
+          <h2 class="card-title text-2xl font-bold text-gray-900 mt-1 mb-4">
+            What we deliberately don't collect
+          </h2>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            Worth stating plainly, since "subscription tracker" makes some
+            people expect otherwise:
+          </p>
+          <div
+            class="flex gap-3 items-start bg-blue-50 border border-blue-100 rounded-2xl p-4"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              class="w-4 h-4 mt-0.5 text-blue-600 shrink-0"
+            >
+              <path
+                d="M4 12L10 18L20 6"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+            <p class="text-sm text-gray-700 leading-relaxed">
+              No bank account, card, or statement access. No document uploads,
+              no bank-statement parsing, no linked financial accounts of any
+              kind — every figure in the app is one you typed in yourself.
+            </p>
+          </div>
+        </section>
+
+        <section id="third-parties" class="pt-6 border-t border-gray-100">
+          <span class="text-xs font-bold text-blue-600 tracking-wide">03</span>
+          <h2 class="card-title text-2xl font-bold text-gray-900 mt-1 mb-4">
+            Who your data goes to, and why
+          </h2>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            subsTrack is built on a small number of specialist services rather
+            than one do-everything platform. Here's the complete list, and
+            exactly what each one sees:
+          </p>
+
+          <div class="overflow-x-auto border border-gray-100 rounded-2xl">
+            <table class="w-full min-w-[560px] text-sm border-collapse">
+              <thead>
+                <tr class="bg-gray-50 text-left">
+                  <th
+                    class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wide"
+                    >Service</th
+                  >
+                  <th
+                    class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wide"
+                    >Purpose</th
+                  >
+                  <th
+                    class="px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wide"
+                    >What it receives</th
+                  >
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  services.map((s) => (
+                    <tr class="border-t border-gray-100">
+                      <td class="px-4 py-3 font-bold text-gray-900 whitespace-nowrap">
+                        {s.name}
+                      </td>
+                      <td class="px-4 py-3 text-xs font-semibold text-blue-600 whitespace-nowrap">
+                        {s.purpose}
+                      </td>
+                      <td class="px-4 py-3 text-gray-600">{s.receives}</td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
+
+          <p class="text-gray-600 leading-relaxed mt-4">
+            We don't sell data to anyone, and we don't run advertising of any
+            kind.
+          </p>
+        </section>
+
+        <section id="use" class="pt-6 border-t border-gray-100">
+          <span class="text-xs font-bold text-blue-600 tracking-wide">04</span>
+          <h2 class="card-title text-2xl font-bold text-gray-900 mt-1 mb-4">
+            How we use it
+          </h2>
+          <ul class="list-disc pl-5 text-gray-600 text-sm space-y-1.5">
+            <li>
+              To show you your own subscriptions, totals, and renewal calendar
+            </li>
+            <li>
+              To generate the spend forecasts and category breakdowns on the
+              Insights tab
+            </li>
+            <li>
+              To send a renewal reminder notification, if you've turned that on
+            </li>
+            <li>
+              To recognize you as a paying Pro user across sessions and devices
+            </li>
+            <li>
+              To keep the service running securely and investigate abuse or
+              errors
+            </li>
+          </ul>
+        </section>
+
+        <section id="retention" class="pt-6 border-t border-gray-100">
+          <span class="text-xs font-bold text-blue-600 tracking-wide">05</span>
+          <h2 class="card-title text-2xl font-bold text-gray-900 mt-1 mb-4">
+            Retention &amp; deletion
+          </h2>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            Your data stays until you remove it. Deleting a single subscription
+            removes that entry immediately. Deleting your account — available in
+            <code
+              class="bg-gray-100 text-gray-800 rounded px-1.5 py-0.5 text-[13px]"
+              >Account → Delete account</code
+            > — is permanent and, within a short retry window, removes:
+          </p>
+          <ul class="list-disc pl-5 text-gray-600 text-sm space-y-1.5 mb-4">
+            <li>Every subscription you've tracked, from our database</li>
+            <li>Your profile photo, from Cloudinary</li>
+            <li>Your purchase and entitlement record, from RevenueCat</li>
+            <li>Your account and login identity, from Clerk</li>
+          </ul>
+          <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4">
+            <p class="text-sm text-gray-700 leading-relaxed">
+              This is not a soft delete or a 30-day grace period on our end —
+              once you confirm, the deletion job runs until every one of those
+              four systems confirms it's gone.
+            </p>
+          </div>
+        </section>
+
+        <section id="security" class="pt-6 border-t border-gray-100">
+          <span class="text-xs font-bold text-blue-600 tracking-wide">06</span>
+          <h2 class="card-title text-2xl font-bold text-gray-900 mt-1 mb-4">
+            Security
+          </h2>
+          <p class="text-gray-600 leading-relaxed">
+            All traffic between the app and our servers is encrypted
+            (HTTPS/TLS). Passwordless, verified sign-in is handled entirely by
+            Clerk rather than by us storing credentials ourselves. Your data is
+            held on managed infrastructure (Neon for the database, Cloudinary
+            for images) that maintains its own independent security and
+            compliance programs.
+          </p>
+        </section>
+
+        <section id="rights" class="pt-6 border-t border-gray-100">
+          <span class="text-xs font-bold text-blue-600 tracking-wide">07</span>
+          <h2 class="card-title text-2xl font-bold text-gray-900 mt-1 mb-4">
+            Your rights
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+            {
+              rights.map((r) => (
+                <div class="bg-gray-50 border border-gray-100 rounded-2xl p-4">
+                  <h4 class="font-bold text-sm text-gray-900 mb-1">
+                    {r.title}
+                  </h4>
+                  <p class="text-sm text-gray-600">{r.body}</p>
+                </div>
+              ))
+            }
+          </div>
+          <p class="text-gray-600 leading-relaxed">
+            If you're in the EEA, UK, or California, these map to your rights
+            under GDPR and the CCPA respectively — we apply them to everyone,
+            regardless of where you're writing in from.
+          </p>
+        </section>
+
+        <section id="children" class="pt-6 border-t border-gray-100">
+          <span class="text-xs font-bold text-blue-600 tracking-wide">08</span>
+          <h2 class="card-title text-2xl font-bold text-gray-900 mt-1 mb-4">
+            Children's privacy
+          </h2>
+          <p class="text-gray-600 leading-relaxed">
+            subsTrack is not directed at children, and we don't knowingly
+            collect data from anyone under 13 (or the minimum age in your
+            country, if higher). If you believe a child has created an account,
+            email us and we'll delete it.
+          </p>
+        </section>
+
+        <section id="changes" class="pt-6 border-t border-gray-100">
+          <span class="text-xs font-bold text-blue-600 tracking-wide">09</span>
+          <h2 class="card-title text-2xl font-bold text-gray-900 mt-1 mb-4">
+            Changes to this policy
+          </h2>
+          <p class="text-gray-600 leading-relaxed">
+            If this policy changes in a way that meaningfully affects how your
+            data is handled, we'll update the effective date above and, where
+            required, notify you in the app before the change takes effect.
+          </p>
+        </section>
+
+        <section id="contact" class="pt-6 border-t border-gray-100">
+          <span class="text-xs font-bold text-blue-600 tracking-wide">10</span>
+          <h2 class="card-title text-2xl font-bold text-gray-900 mt-1 mb-4">
+            Contact
+          </h2>
+          <p class="text-gray-600 leading-relaxed">
+            subsTrack is an independent app. For any privacy question, deletion
+            request, or data export — write to
+            <a
+              href="mailto:devj5509@gmail.com"
+              class="text-blue-600 hover:text-blue-700 transition font-semibold"
+              >devj5509@gmail.com</a
+            >. We aim to respond within a few business days.
+          </p>
+        </section>
+      </div>
+
+      <div
+        class="flex flex-wrap justify-between gap-2 text-xs font-semibold text-gray-400 border-t border-gray-100 mt-10 pt-6"
+      >
+        <span>subsTrack · Privacy Policy</span>
+        <span>Last reviewed Sept 6, 2026</span>
+      </div>
+    </section>
+
+    <div class="text-center mt-6">
+      <a
+        href="/"
+        class="text-sm font-semibold text-gray-600 hover:text-blue-600 transition"
+        >&larr; Back to portfolio</a
+      >
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 384" role="img" aria-labelledby="substrackTitle">
+  <title id="substrackTitle">subsTrack app icon</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5A6BEF" />
+      <stop offset="1" stop-color="#4457E6" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="384" fill="url(#bg)" />
+  <rect x="248" y="112" width="144" height="144" rx="34" fill="#ffffff" />
+  <path d="M292 186 L312 206 L350 166" fill="none" stroke="#4457E6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="320" y="300" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="30" fill="#ffffff" letter-spacing="0.5">subsTrack</text>
+</svg>

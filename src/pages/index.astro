@@ -492,6 +492,16 @@ const highlightExperienceText = (value) => {
                         Repo
                       </a>
                     )}
+                    {project.backendRepoUrl && (
+                      <a
+                        href={project.backendRepoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-gray-700 hover:text-blue-600 transition"
+                      >
+                        Backend
+                      </a>
+                    )}
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
@@ -500,6 +510,14 @@ const highlightExperienceText = (value) => {
                         class="text-gray-700 hover:text-blue-600 transition"
                       >
                         Live
+                      </a>
+                    )}
+                    {project.privacyUrl && (
+                      <a
+                        href={project.privacyUrl}
+                        class="text-gray-700 hover:text-blue-600 transition"
+                      >
+                        Privacy Policy
                       </a>
                     )}
                   </div>
