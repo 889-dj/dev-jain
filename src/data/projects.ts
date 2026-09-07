@@ -17,7 +17,7 @@ export const projects: Project[] = [
     image: "/images/substrack-project.svg",
     repoUrl: "https://github.com/889-dj/subsTrack",
     backendRepoUrl: "https://github.com/889-dj/subsTrack-backend",
-    privacyUrl: "/privacy",
+    privacyUrl: "/projects/substrack/privacypolicy",
     tags: ["React Native", "Expo", "Neon (Postgres)", "Clerk", "RevenueCat"],
   },
 ];
