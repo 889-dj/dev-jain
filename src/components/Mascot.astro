@@ -1,6 +1,6 @@
 ---
 /**
- * Monkey mascot, docked bottom-right: follows the cursor, blinks, greets
+ * Mikey, the monkey mascot, docked bottom-right: follows the cursor, blinks, greets
  * first-time visitors and says something different every time it's booped.
  * Behaviour adapted from nilbuild/page-mascot (MIT); the character is an
  * original inline SVG animated with CSS, so there are no images and no React.
@@ -9,7 +9,7 @@ interface Props {
   label?: string;
 }
 
-const { label = "monkey" } = Astro.props;
+const { label = "Mikey" } = Astro.props;
 ---
 
 <div class="mascot-dock">
@@ -17,8 +17,8 @@ const { label = "monkey" } = Astro.props;
   <button
     type="button"
     class="mascot"
-    aria-label={`Boop the ${label}`}
-    title="Boop me!"
+    aria-label={`Boop ${label}`}
+    title={`Boop ${label}!`}
     data-r=""
   >
     <svg class="mascot-body" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
@@ -88,9 +88,10 @@ const { label = "monkey" } = Astro.props;
 <style>
   .mascot-dock {
     position: fixed;
-    /* Sits just left of the fixed theme toggle (bottom-6 right-6, 56px). */
-    right: 88px;
-    bottom: 16px;
+    /* Stacked above the fixed theme toggle (bottom-6 right-6, 56px wide),
+       centred on it: right = 24 + 56/2 - width/2, bottom = 24 + 56 + gap. */
+    right: 8px;
+    bottom: 86px;
     z-index: 50;
     width: 88px;
     height: 88px;
@@ -98,8 +99,8 @@ const { label = "monkey" } = Astro.props;
 
   @media (max-width: 639px) {
     .mascot-dock {
-      right: 84px;
-      bottom: 20px;
+      right: 20px;
+      bottom: 86px;
       width: 64px;
       height: 64px;
     }
@@ -113,7 +114,7 @@ const { label = "monkey" } = Astro.props;
 
   .mascot-bubble {
     position: absolute;
-    right: -8px;
+    right: 0;
     bottom: calc(100% + 12px);
     width: max-content;
     max-width: min(240px, calc(100vw - 32px));
@@ -332,14 +333,15 @@ const { label = "monkey" } = Astro.props;
   ];
 
   const GREETINGS = [
-    "Hey there! 👋 I'm Dev's monkey. He writes the code, I handle the monkey business.",
-    "Oh, a visitor! Make yourself at home. The good stuff is just below.",
-    "Hi! 👋 Dev builds apps. I just supervise. Boop me if you get bored.",
-    "Welcome in! Fair warning: the code here is cleaner than my desk.",
+    "Hey there! 👋 I'm Mikey, Dev's monkey. He writes the code, I handle the monkey business.",
+    "Oh, a visitor! I'm Mikey. Make yourself at home — the good stuff is just below.",
+    "Hi! 👋 I'm Mikey. Dev builds apps, I just supervise. Boop me if you get bored.",
+    "Welcome in! I'm Mikey. Fair warning: the code here is cleaner than my desk.",
   ];
 
   const LINES = [
     "Hehe, that tickles.",
+    "Mikey's the name. Boops are the game.",
     "Dev ships apps. I ship bananas. 🍌",
     "No bugs here. I ate them all.",
     "Works on my machine. 🐒",
