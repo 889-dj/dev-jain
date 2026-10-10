@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Mascot from "../components/Mascot.astro";
 import data from "../data.json";
 import { projects } from "../data/projects";
 
@@ -603,6 +604,8 @@ const highlightExperienceText = (value) => {
       )
     }
   </div>
+
+  <Mascot />
 </BaseLayout>
 
 <script>

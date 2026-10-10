@@ -1,0 +1,494 @@
+---
+/**
+ * Monkey mascot, docked bottom-right: follows the cursor, blinks, greets
+ * first-time visitors and says something different every time it's booped.
+ * Behaviour adapted from nilbuild/page-mascot (MIT); the character is an
+ * original inline SVG animated with CSS, so there are no images and no React.
+ */
+interface Props {
+  label?: string;
+}
+
+const { label = "monkey" } = Astro.props;
+---
+
+<div class="mascot-dock">
+  <p class="mascot-bubble" role="status" aria-live="polite"></p>
+  <button
+    type="button"
+    class="mascot"
+    aria-label={`Boop the ${label}`}
+    title="Boop me!"
+    data-r=""
+  >
+    <svg class="mascot-body" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+      <g class="m-ears">
+        <circle cx="38" cy="104" r="25" fill="#7a4a26" />
+        <circle cx="38" cy="104" r="14" fill="#f0c6a0" />
+        <circle cx="162" cy="104" r="25" fill="#7a4a26" />
+        <circle cx="162" cy="104" r="14" fill="#f0c6a0" />
+      </g>
+
+      <g class="m-head">
+        <path d="M96 46 C 90 30, 106 22, 114 32 C 106 30, 102 36, 106 44 Z" fill="#8b5530" />
+        <circle cx="100" cy="106" r="64" fill="#8b5530" />
+      </g>
+
+      <g class="m-face">
+        <!-- peach face: two eye patches and a muzzle -->
+        <circle cx="78" cy="99" r="26" fill="#f3cfa7" />
+        <circle cx="122" cy="99" r="26" fill="#f3cfa7" />
+        <ellipse cx="100" cy="131" rx="41" ry="30" fill="#f3cfa7" />
+
+        <ellipse class="m-cheek" cx="64" cy="124" rx="8" ry="5" fill="#f29b8b" />
+        <ellipse class="m-cheek" cx="136" cy="124" rx="8" ry="5" fill="#f29b8b" />
+
+        <g class="m-eyes">
+          <g class="m-eyes-default">
+            <ellipse cx="80" cy="100" rx="7.5" ry="9.5" fill="#2a1a10" />
+            <ellipse cx="120" cy="100" rx="7.5" ry="9.5" fill="#2a1a10" />
+            <circle cx="83" cy="96" r="2.6" fill="#fff" />
+            <circle cx="123" cy="96" r="2.6" fill="#fff" />
+          </g>
+          <g class="m-eyes-happy" fill="none" stroke="#2a1a10" stroke-width="4" stroke-linecap="round">
+            <path d="M71 103 Q80 92 89 103" />
+            <path d="M111 103 Q120 92 129 103" />
+          </g>
+          <g class="m-eyes-heart" fill="#e5484d">
+            <path d="M80 109 C 66 99, 70 88, 80 95 C 90 88, 94 99, 80 109 Z" />
+            <path d="M120 109 C 106 99, 110 88, 120 95 C 130 88, 134 99, 120 109 Z" />
+          </g>
+          <g class="m-eyes-wide">
+            <circle cx="80" cy="100" r="11" fill="#fff" stroke="#2a1a10" stroke-width="2.5" />
+            <circle cx="120" cy="100" r="11" fill="#fff" stroke="#2a1a10" stroke-width="2.5" />
+            <circle cx="80" cy="100" r="4.5" fill="#2a1a10" />
+            <circle cx="120" cy="100" r="4.5" fill="#2a1a10" />
+          </g>
+          <g class="m-eyes-dizzy" fill="none" stroke="#2a1a10" stroke-width="3" stroke-linecap="round">
+            <path d="M80 100 m-1 0 a1 1 0 1 1 2 0 a3 3 0 1 1 -6 0 a5 5 0 1 1 10 0 a7 7 0 1 1 -14 0" />
+            <path d="M120 100 m-1 0 a1 1 0 1 1 2 0 a3 3 0 1 1 -6 0 a5 5 0 1 1 10 0 a7 7 0 1 1 -14 0" />
+          </g>
+        </g>
+
+        <ellipse cx="94" cy="122" rx="2.6" ry="2" fill="#6b3e1e" />
+        <ellipse cx="106" cy="122" rx="2.6" ry="2" fill="#6b3e1e" />
+
+        <path class="m-mouth-default" d="M86 135 Q100 147 114 135" fill="none" stroke="#6b3e1e" stroke-width="3.5" stroke-linecap="round" />
+        <g class="m-mouth-open">
+          <path d="M84 133 Q100 133 116 133 Q114 154 100 154 Q86 154 84 133 Z" fill="#5a2a14" />
+          <ellipse cx="100" cy="148" rx="8" ry="4.5" fill="#e5737a" />
+        </g>
+        <ellipse class="m-mouth-o" cx="100" cy="140" rx="6" ry="7" fill="#5a2a14" />
+        <path class="m-mouth-wobble" d="M86 140 q4.6 -5 9.3 0 t9.3 0 t9.3 0" fill="none" stroke="#6b3e1e" stroke-width="3.5" stroke-linecap="round" />
+      </g>
+    </svg>
+  </button>
+</div>
+
+<style>
+  .mascot-dock {
+    position: fixed;
+    /* Sits just left of the fixed theme toggle (bottom-6 right-6, 56px). */
+    right: 88px;
+    bottom: 16px;
+    z-index: 50;
+    width: 88px;
+    height: 88px;
+  }
+
+  @media (max-width: 639px) {
+    .mascot-dock {
+      right: 84px;
+      bottom: 20px;
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+  @media print {
+    .mascot-dock {
+      display: none;
+    }
+  }
+
+  .mascot-bubble {
+    position: absolute;
+    right: -8px;
+    bottom: calc(100% + 12px);
+    width: max-content;
+    max-width: min(240px, calc(100vw - 32px));
+    margin: 0;
+    padding: 10px 14px;
+    background: #ffffff;
+    color: #111827;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.15);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+    transform-origin: 85% 100%;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  /* little tail pointing down at the monkey */
+  .mascot-bubble::after {
+    content: "";
+    position: absolute;
+    right: 44px;
+    bottom: -7px;
+    width: 12px;
+    height: 12px;
+    background: inherit;
+    border-right: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    transform: rotate(45deg);
+  }
+
+  @media (max-width: 639px) {
+    .mascot-bubble {
+      font-size: 13px;
+    }
+    .mascot-bubble::after {
+      right: 32px;
+    }
+  }
+
+  .mascot-bubble.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  :global([data-theme="dark"]) .mascot-bubble {
+    background: #1f2937;
+    color: #f9fafb;
+    border-color: #374151;
+  }
+  :global([data-theme="dark"]) .mascot-bubble::after {
+    border-color: #374151;
+  }
+
+  /* :where() keeps this at zero specificity so utility classes passed in
+     (absolute, sizes, margins) always win. */
+  :global(:where(.mascot)) {
+    --dx: 0;
+    --dy: 0;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    appearance: none;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    border-radius: 9999px;
+  }
+
+  .mascot:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 4px;
+  }
+
+  .mascot-body {
+    filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.18));
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    transform-origin: 50% 80%;
+  }
+
+  .mascot-body g {
+    transform-box: view-box;
+    transition: transform 0.18s ease-out;
+  }
+
+  /* Parallax: the further a layer is from the back, the more it moves. */
+  .m-ears {
+    transform: translate(calc(var(--dx) * -3px), calc(var(--dy) * 2px));
+  }
+  .m-head {
+    transform: translate(calc(var(--dx) * 3px), calc(var(--dy) * 3px));
+  }
+  .m-face {
+    transform: translate(calc(var(--dx) * 10px), calc(var(--dy) * 9px));
+  }
+  .m-eyes {
+    transform: translate(calc(var(--dx) * 4px), calc(var(--dy) * 4px));
+  }
+
+  .m-eyes-default {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 0.08s ease-in-out;
+  }
+  .mascot.is-blinking .m-eyes-default {
+    transform: scaleY(0.1);
+  }
+
+  /* Expressions: one set of eyes and one mouth visible at a time. */
+  .m-eyes-happy,
+  .m-eyes-heart,
+  .m-eyes-wide,
+  .m-eyes-dizzy,
+  .m-mouth-open,
+  .m-mouth-o,
+  .m-mouth-wobble {
+    display: none;
+  }
+  .m-cheek {
+    opacity: 0.55;
+    transition: opacity 0.2s;
+  }
+
+  .mascot[data-r="blink"] .m-eyes-default {
+    transform: scaleY(0.1);
+  }
+
+  .mascot[data-r="happy"] .m-eyes-default,
+  .mascot[data-r="heart"] .m-eyes-default,
+  .mascot[data-r="surprised"] .m-eyes-default,
+  .mascot[data-r="dizzy"] .m-eyes-default,
+  .mascot[data-r="happy"] .m-mouth-default,
+  .mascot[data-r="heart"] .m-mouth-default,
+  .mascot[data-r="surprised"] .m-mouth-default,
+  .mascot[data-r="dizzy"] .m-mouth-default {
+    display: none;
+  }
+
+  .mascot[data-r="happy"] .m-eyes-happy,
+  .mascot[data-r="happy"] .m-mouth-open,
+  .mascot[data-r="heart"] .m-eyes-heart,
+  .mascot[data-r="heart"] .m-mouth-open,
+  .mascot[data-r="surprised"] .m-eyes-wide,
+  .mascot[data-r="surprised"] .m-mouth-o,
+  .mascot[data-r="dizzy"] .m-eyes-dizzy,
+  .mascot[data-r="dizzy"] .m-mouth-wobble {
+    display: inline;
+  }
+
+  .mascot[data-r="happy"] .m-cheek,
+  .mascot[data-r="heart"] .m-cheek {
+    opacity: 0.9;
+  }
+
+  .mascot[data-r="dizzy"] .m-eyes-dizzy path {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: m-spin 0.6s linear infinite;
+  }
+
+  @keyframes m-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mascot-bubble,
+    .mascot-body g,
+    .m-eyes-default {
+      transition: none;
+    }
+    .mascot[data-r="dizzy"] .m-eyes-dizzy path {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  // Sector logic follows page-mascot: 8 directions plus a centred dead zone,
+  // with hysteresis so the head doesn't flicker on sector edges.
+  const VECTORS: Array<[number, number]> = [
+    [1, 0], [0.75, 0.75], [0, 1], [-0.75, 0.75],
+    [-1, 0], [-0.75, -0.75], [0, -1], [0.75, -0.75],
+  ];
+  const SECTOR = (Math.PI * 2) / VECTORS.length;
+  const HYSTERESIS = 0.12;
+  const DEAD_ZONE = 70;
+
+  const PAYOFFS = ["happy", "heart", "surprised"];
+  const BOOP_PAYOFF = 120;
+  const BOOP_END = 700;
+  const DIZZY_AFTER = 4;
+  const DIZZY_WINDOW = 1600;
+  const DIZZY_END = 1300;
+
+  const SQUASH: Keyframe[] = [
+    { transform: "scale(1, 1)", easing: "ease-in" },
+    { transform: "scale(1.10, 0.86)", offset: 0.18, easing: "ease-out" },
+    { transform: "scale(0.95, 1.08)", offset: 0.45, easing: "ease-in-out" },
+    { transform: "scale(1.03, 0.97)", offset: 0.72, easing: "ease-in-out" },
+    { transform: "scale(1, 1)" },
+  ];
+
+  const GREETINGS = [
+    "Hey there! 👋 I'm Dev's monkey. He writes the code, I handle the monkey business.",
+    "Oh, a visitor! Make yourself at home. The good stuff is just below.",
+    "Hi! 👋 Dev builds apps. I just supervise. Boop me if you get bored.",
+    "Welcome in! Fair warning: the code here is cleaner than my desk.",
+  ];
+
+  const LINES = [
+    "Hehe, that tickles.",
+    "Dev ships apps. I ship bananas. 🍌",
+    "No bugs here. I ate them all.",
+    "Works on my machine. 🐒",
+    "Psst… the Download CV button is right up top.",
+    "I'm not a feature. I'm a vibe.",
+    "Hiring? Dev's open to work and freelance. Just saying.",
+    "React Native, Next.js, and one very curious monkey.",
+    "git commit -m \"boop\"",
+    "I'd shake your hand, but I'm mostly face.",
+    "Fun fact: Dev plays chess. I just eat the pawns.",
+    "Every boop is a deploy. Kidding… mostly.",
+    "I passed code review. Barely.",
+    "Careful — four boops and the room starts spinning.",
+    "100% uptime. 0% sleep.",
+  ];
+
+  const DIZZY_LINE = "Whoa… too many boops. Is the page spinning or is it me? 😵";
+
+  const GREETED_KEY = "mascot-greeted";
+  const GREET_DELAY = 900;
+  const GREET_FOR = 6500;
+  const LINE_FOR = 3600;
+
+  const wrap = (a: number) => Math.atan2(Math.sin(a), Math.cos(a));
+  const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Pick a random item, never the same one twice in a row.
+  const picker = (items: string[]) => {
+    let last = -1;
+    return () => {
+      let i = Math.floor(Math.random() * items.length);
+      if (items.length > 1 && i === last) i = (i + 1) % items.length;
+      last = i;
+      return items[i];
+    };
+  };
+
+  document.querySelectorAll<HTMLElement>(".mascot-dock").forEach((dock) => {
+    const mascot = dock.querySelector<HTMLButtonElement>(".mascot");
+    const bubble = dock.querySelector<HTMLElement>(".mascot-bubble");
+    if (!mascot || !bubble) return;
+    const body = mascot.querySelector<SVGSVGElement>(".mascot-body");
+    let timers: number[] = [];
+    let boops = { count: 0, at: 0 };
+    let bubbleTimer = 0;
+    const nextLine = picker(LINES);
+
+    const say = (text: string, ms: number) => {
+      window.clearTimeout(bubbleTimer);
+      bubble.textContent = text;
+      bubble.classList.add("is-visible");
+      bubbleTimer = window.setTimeout(() => bubble.classList.remove("is-visible"), ms);
+    };
+
+    const setReaction = (r: string) => mascot.setAttribute("data-r", r);
+
+    // Cursor tracking: only on devices with a precise pointer.
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      let sector = -1;
+      let pointer: { x: number; y: number } | null = null;
+
+      const look = (v: [number, number]) => {
+        mascot.style.setProperty("--dx", String(v[0]));
+        mascot.style.setProperty("--dy", String(v[1]));
+      };
+
+      const aim = () => {
+        if (!pointer) return;
+        const box = mascot.getBoundingClientRect();
+        const dx = pointer.x - (box.left + box.width / 2);
+        const dy = pointer.y - (box.top + box.height / 2);
+
+        if (Math.hypot(dx, dy) < DEAD_ZONE) {
+          sector = -1;
+          look([0, 0]);
+          return;
+        }
+
+        const angle = Math.atan2(dy, dx);
+        if (sector !== -1 && Math.abs(wrap(angle - sector * SECTOR)) < SECTOR / 2 + HYSTERESIS) {
+          return;
+        }
+        sector = (Math.round(angle / SECTOR) + VECTORS.length) % VECTORS.length;
+        look(VECTORS[sector]);
+      };
+
+      window.addEventListener(
+        "pointermove",
+        (e) => {
+          pointer = { x: e.clientX, y: e.clientY };
+          aim();
+        },
+        { passive: true },
+      );
+      window.addEventListener("scroll", aim, { passive: true });
+    }
+
+    // Idle blinking every few seconds.
+    const scheduleBlink = () => {
+      window.setTimeout(() => {
+        if (!mascot.getAttribute("data-r")) {
+          mascot.classList.add("is-blinking");
+          window.setTimeout(() => mascot.classList.remove("is-blinking"), 140);
+        }
+        scheduleBlink();
+      }, 2800 + Math.random() * 3200);
+    };
+    scheduleBlink();
+
+    // Greet each visitor once per browser session.
+    let greeted = false;
+    try {
+      greeted = sessionStorage.getItem(GREETED_KEY) === "1";
+      sessionStorage.setItem(GREETED_KEY, "1");
+    } catch {
+      // Storage blocked: just greet.
+    }
+    if (!greeted) {
+      window.setTimeout(() => {
+        setReaction("happy");
+        window.setTimeout(() => setReaction(""), 900);
+        say(picker(GREETINGS)(), GREET_FOR);
+      }, GREET_DELAY);
+    }
+
+    mascot.addEventListener("click", () => {
+      timers.forEach(window.clearTimeout);
+      timers = [];
+      const later = (ms: number, r: string) => timers.push(window.setTimeout(() => setReaction(r), ms));
+
+      const now = Date.now();
+      boops.count = now - boops.at < DIZZY_WINDOW ? boops.count + 1 : 1;
+      boops.at = now;
+
+      if (boops.count >= DIZZY_AFTER) {
+        boops.count = 0;
+        setReaction("dizzy");
+        later(DIZZY_END, "");
+        say(DIZZY_LINE, LINE_FOR);
+      } else {
+        setReaction("blink");
+        later(BOOP_PAYOFF, PAYOFFS[(boops.count - 1) % PAYOFFS.length]);
+        later(BOOP_END, "");
+        say(nextLine(), LINE_FOR);
+      }
+
+      if (!reducedMotion()) {
+        body?.animate(SQUASH, { duration: 420, easing: "linear" });
+      }
+    });
+  });
+</script>
